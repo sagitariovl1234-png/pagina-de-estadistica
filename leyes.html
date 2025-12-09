@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+<title>Leyes Conmutativa, Asociativa y Distributiva / Aquarius</title>
+<style>
+ body{
+  margin:0;
+  font-family:"Segoe UI",sans-serif;
+  background:linear-gradient(135deg,#f2f6ff,#e3ecff);
+  color:#2c2c2c;
+ }
+ header{
+  text-align:center;
+  font-size:32px;
+  padding:25px;
+  font-weight:300;
+  background:rgba(255,255,255,0.45);
+  backdrop-filter:blur(18px) saturate(170%);
+  border-bottom:1px solid rgba(0,0,0,0.15);
+ }
+ .glass{
+  max-width:850px;
+  margin:45px auto;
+  padding:30px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.55);
+  backdrop-filter:blur(22px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.8);
+  box-shadow:0 0 22px rgba(0,0,0,0.08),0 0 50px rgba(130,170,255,0.35);
+ }
+ h2{font-weight:300;font-size:26px;margin-bottom:10px;color:#21304b;}
+ p{font-size:17px;line-height:1.6;margin-bottom:10px;}
+ .neon{
+  text-shadow:0 0 8px #6eeaff,0 0 16px #91f9ff;
+  color:#005b7b;
+ }
+ .footer-ref{
+  text-align:center;margin:50px auto;font-size:14px;color:#444;width:90%;opacity:.85;
+ }
+.nav{display:flex;justify-content:center;gap:30px;padding:15px 0;background:rgba(255,255,255,0.28);backdrop-filter:blur(22px) saturate(200%);border-bottom:1px solid rgba(0,0,0,0.15);} .navbtn{text-decoration:none;color:#004361;padding:8px 18px;border-radius:8px;font-size:15px;background:rgba(255,255,255,0.45);backdrop-filter:blur(18px);transition:.25s;} .navbtn:hover{background:rgba(255,255,255,0.75);transform:scale(1.05);} .glass-header{position:sticky;top:0;z-index:50;} </style>
+</head>
+<body>
+<header class="nav glass-header">
+  <a href="menu.html" class="navbtn">Menú Principal</a>
+  <a href="arbol.html" class="navbtn">Diagrama de arbol</a>
+  <a href="Venn.html" class="navbtn">Diagrama de venn</a>
+  <a href="conjuntos.html" class="navbtn">Conjunto</a>
+</header>
+<header class="neon" style="margin-top:20px;">Leyes Conmutativa, Asociativa y Distributiva</header>
+<div class="glass">
+<h2 class="neon">1. Propiedad del Elemento Neutro</h2>
+<p>En la <strong>suma</strong>, el número neutro es el <strong>0</strong>. Cualquier número sumado a 0 conserva su valor:</p>
+<p><strong>a + 0 = a</strong> &nbsp;&nbsp; | &nbsp;&nbsp; Ejemplo: <strong>4 + 0 = 4</strong></p>
+<p>En la <strong>multiplicación</strong>, el número neutro es el <strong>1</strong>, ya que un número multiplicado por 1 mantiene su valor:</p>
+<p><strong>a × 1 = a</strong> &nbsp;&nbsp; | &nbsp;&nbsp; Ejemplo: <strong>6 × 1 = 6</strong></p>
+</div>
+
+<div class="glass">
+  <h2>imagen representativa</h2>
+  <center><img src="imagens/leyescmn.webp""></center>
+</div>
+
+<div class="glass">
+<h2 class="neon">2. Propiedad Conmutativa</h2>
+<p>Esta propiedad indica que el orden de los elementos no altera el resultado. Solo aplica a suma y multiplicación.</p>
+<p><strong>a + b = b + a</strong> &nbsp;&nbsp; | &nbsp;&nbsp; <strong>a × b = b × a</strong></p>
+<p>Ejemplo: <strong>3 + 5 = 5 + 3 = 8</strong>. El orden cambia, el resultado no. Lo mismo ocurre con multiplicación: <strong>4 × 2 = 2 × 4 = 8</strong>.</p>
+<p>No aplica a división ni resta, ya que <strong>8 − 3 ≠ 3 − 8</strong> y <strong>10 ÷ 2 ≠ 2 ÷ 10</strong>.</p>
+</div>
+<div class="glass">
+<h2 class="neon">3. Propiedad Asociativa</h2>
+<p>Para la <strong>suma</strong>, nos indica que los números pueden reagruparse sin modificar el resultado. Los paréntesis solo señalan qué se calcula primero:</p>
+<p>1) <strong>(3 + 4) + 5 = 7 + 5 = 12</strong><br>2) <strong>3 + (4 + 5) = 3 + 9 = 12</strong></p>
+<p>En la <strong>multiplicación</strong> ocurre lo mismo, ya que se puede reagrupar y el resultado no cambia:</p>
+<p>1) <strong>(3 × 4) × 5 = 12 × 5 = 60</strong><br>2) <strong>3 × (4 × 5) = 3 × 20 = 60</strong></p>
+<p>Así, <strong>(a × b) × c = a × (b × c)</strong>. La asociación cambia el orden de resolución, pero no el total.</p>
+</div>
+<div class="glass">
+<h2 class="neon">4. Propiedad Distributiva</h2>
+<p>La multiplicación se puede distribuir sobre una suma o resta. Es decir, el número fuera del paréntesis multiplica a cada término dentro del mismo:</p>
+<p><strong>a × (b + c) = a × b + a × c</strong></p>
+<p>Ejemplo:</p>
+<p><strong>3(5 + 4) = 3 × 9 = 27</strong><br>Pero también:<br><strong>3 × 5 + 3 × 4 = 15 + 12 = 27</strong></p>
+<p>Interpretación visual: si tienes 5 manzanas y 4 peras en 3 canastas:</p>
+<p>—Total manzanas = <strong>15</strong><br>—Total peras = <strong>12</strong><br>—Total de frutas = <strong>27</strong></p>
+<p>Esta propiedad relaciona suma y multiplicación, y es fundamental para álgebra y factorización.</p>
+</div>
+
+
+<div class="glass aero-table">
+  <h2 class="neon" style="text-align:center;">Comparativa visual de propiedades</h2>
+  <div class="tabla">
+    <div class="col">
+      <h3>Suma</h3>
+      <p><strong>Conmutativa:</strong> a + b = b + a<br>🍎 + 🍋 = 🍋 + 🍎 → 8 + 5 = 5 + 8</p>
+      <p><strong>Asociativa:</strong> (a + b) + c = a + (b + c)<br>(🍎 + 🍋) + 🍇 = 🍎 + (🍋 + 🍇)</p>
+      <p><strong>Distributiva:</strong> a(b + c) = ab + ac<br>🍎(🍋 + 🍇) = 🍎🍋 + 🍎🍇</p>
+    </div>
+    <div class="col">
+      <h3>Multiplicación</h3>
+      <p><strong>Conmutativa:</strong> ab = ba<br>🍎🍋 = 🍋🍎 → 2·5 = 5·2</p>
+      <p><strong>Asociativa:</strong> (ab)c = a(bc)<br>(🍎🍋)🍇 = 🍎(🍋🍇)</p>
+      <p><strong>Distributiva:</strong> a(b + c) = ab + ac<br>🍎(🍋 + 🍇) = 🍎🍋 + 🍎🍇</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.aero-table{background:rgba(255,255,255,0.45);box-shadow:0 0 40px rgba(130,170,255,0.4);}
+.tabla{display:flex;justify-content:space-between;gap:25px;margin-top:20px;}
+.col{flex:1;padding:15px;border-radius:12px;background:rgba(255,255,255,0.35);backdrop-filter:blur(14px) saturate(180%);box-shadow:0 0 18px rgba(0,0,0,0.08);} 
+.col h3{text-align:center;color:#005b7b;margin-bottom:10px;font-size:20px;}
+</style>
+
+<div class="glass">
+<h2>video explicativo del canal estudia con Marisol</h2>
+<center><iframe 
+width="560"
+height="315" 
+src="imagens/leyes video.mp4"
+title="tipos de leyes conmutativa, asociativa y distribucion" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe></center>
+</div>
+
+<div class="glass">
+<h2 class="neon">Ejemplo resuelto</h2>
+<p><strong>Problema:</strong> Simplificar y evaluar la expresión aplicando las propiedades estudiadas:</p>
+<p><strong>E = 2 	imes (3 + 4) + (5 + 0)</strong></p>
+<p><strong>Paso 1 — Propiedad del elemento neutro (suma):</strong> Reconocemos que <em>5 + 0 = 5</em>, por lo que la expresión queda:</p>
+<p><strong>E = 2 	imes (3 + 4) + 5</strong></p>
+<p><strong>Paso 2 — Propiedad distributiva:</strong> Aplicamos la distributiva para eliminar el paréntesis: <em>2 × (3 + 4) = 2×3 + 2×4</em></p>
+<p><strong>E = (2×3 + 2×4) + 5</strong></p>
+<p><strong>Paso 3 — Propiedad asociativa y conmutativa (suma):</strong> Agrupamos y reordenamos sumandos para calcular más cómodamente. Por ejemplo, usamos conmutatividad para juntar <em>2×4</em> con <em>5</em> si conviene:</p>
+<p><strong>E = 2×3 + 2×4 + 5 = 6 + 8 + 5</strong></p>
+<p>Ahora agrupamos (asociativa): <strong>(6 + 8) + 5 = 14 + 5 = 19</strong></p>
+<p><strong>Resultado:</strong> <strong>E = 19</strong></p>
+<p><em>Comentario:</em> En este ejemplo usamos la propiedad del elemento neutro para simplificar una suma, la distribuitiva para eliminar paréntesis y las propiedades conmutativa-asociativa para reordenar y agrupar sumandos con el fin de facilitar el cálculo mental.</p>
+</div>
+
+
+</div>
+
+<div class="footer-ref">
+<h3 style="font-weight:300;color:#21304b;">Referencia APA 7</h3>
+<p><em>Spanish GED 365. (s.f.). Propiedad conmutativa, asociativa y distributiva. Recuperado de https://www.spanishged365.com/propiedad-conmutativa-asociativa-y-distributiva/</em></p>
+</div>
+<footer>Leyes asociativa, conmutativa y distributiva. (2025). Disfrutalasmatematicas.com. https://www.disfrutalasmatematicas.com/asociativa-conmutativa-distributiva.html
+
+</footer>
+</body>
+</html>

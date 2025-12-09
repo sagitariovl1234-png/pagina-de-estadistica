@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+  <title>Axiomas y Reglas de Probabilidad - Estilo Frutiger Aero</title>
+  <style>
+    body {
+      font-family: 'Frutiger', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #80deea);
+      color: #03396c;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #011f4b;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      text-shadow: 1px 1px 2px #b3e5fc;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-top: 1.6rem;
+      text-shadow: 1px 1px 1px #b3e5fc;
+    }
+
+    .contenido {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      padding: 1.6rem 1.8rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.08);
+    }
+
+    .formula {
+      background: #b3e5fc;
+      color: #03396c;
+      padding: 0.6rem 0.8rem;
+      display: inline-block;
+      font-size: 1rem;
+      margin: 0.8rem 0;
+      border-radius: 6px;
+      border: 1px solid #80deea;
+    }
+
+    .ejemplo {
+      background: #80deea;
+      padding: 0.9rem 1rem;
+      border-radius: 8px;
+      margin: 0.8rem 0;
+      color: #011f4b;
+    }
+
+    .video-container { text-align: center; margin: 1.2rem 0; }
+    .video-container iframe {
+      width: 100%; max-width: 720px; height: 405px; border-radius: 12px;
+      border: 2px solid #03396c; box-shadow: 0 0 12px rgba(0,0,0,0.12);
+    }
+
+    
+    .game-container {
+      margin-top: 1.4rem;
+      padding: 1.2rem;
+      background: rgba(255,255,255,0.98);
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.08);
+    }
+
+    .game-title { font-size: 1.25rem; color: #011f4b; margin-bottom: 0.8rem; text-align: center; }
+    .game-box { background: #b3e5fc; padding: 0.9rem; border-radius: 8px; font-size: 1rem; color: #011f4b; margin-bottom: 0.8rem; }
+
+    .game-input { width: 100%; padding: 0.6rem; font-size: 1rem; border-radius: 8px; border: 2px solid #80deea; margin-top: 0.4rem; }
+
+    .game-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.6rem; }
+    .game-button { padding: 0.7rem; font-size: 1rem; border: none; border-radius: 8px; background: #03396c; color: white; cursor: pointer; }
+    .game-button.secondary { background: #6c9fbf; }
+    .game-button:hover { opacity: 0.95; transform: translateY(-2px); transition: 0.14s; }
+
+    .game-result { margin-top: 0.9rem; font-size: 1.05rem; text-align: center; font-weight: bold; min-height: 1.2em; }
+
+    .explanation { margin-top: 0.8rem; background: #eef9fb; border-left: 4px solid #03396c; padding: 0.6rem 0.8rem; border-radius: 6px; color: #023047; }
+
+    footer { text-align: center; margin-top: 1.6rem; color: #03396c; font-size: 0.9rem; }
+
+    @media (max-width: 520px) {
+      .game-row { grid-template-columns: 1fr; }
+      .video-container iframe { height: 260px; }
+    }
+     
+    .main-header { background: rgba(255,255,255,0.85); padding: 0.8rem; border-radius: 12px; margin-bottom: 1.2rem; box-shadow: 0 0 12px rgba(0,0,0,0.1); }
+    .nav-bar { display: flex; justify-content: center; gap: 1rem; }
+    .nav-btn { text-decoration: none; background: #03396c; color: white; padding: 0.6rem 1rem; border-radius: 8px; font-size: 1rem; transition: 0.15s; border: 2px solid transparent; }
+    .nav-btn:hover { background: #80deea; color: #011f4b; border-color: #03396c; transform: translateY(-2px); }
+</style>
+</head>
+
+  
+<body>
+  <header class="main-header">
+    <nav class="nav-bar">
+      <a href="menu.html" class="nav-btn">Inicio</a>
+      <a href="condicional.html" class="nav-btn">probabilidad condicional</a>
+      <a href="clasico.html" class="nav-btn">concepto clasico</a>
+      <a href="bayes.html" class="nav-btn">Teorema de bayes</a>
+    </nav>
+  </header>
+  <h1>Axiomas y Reglas de Probabilidad</h1>
+  <div class="contenido">
+
+    <h2>Axiomas de Probabilidad</h2>
+    <ul>
+      <li><strong>Axioma 1:</strong> La probabilidad de que ocurra un evento <code>A</code> cualquiera siempre está entre cero y uno.
+        <div class="formula">0 ≤ P(A) ≤ 1</div>
+      </li>
+      <li><strong>Axioma 2:</strong> La probabilidad del espacio muestral completo <code>S</code> es 1.
+        <div class="formula">P(S) = 1</div>
+      </li>
+      <li><strong>Axioma 3:</strong> Si <code>A</code> y <code>B</code> son eventos mutuamente exclusivos, la probabilidad de su unión es la suma de sus probabilidades.
+        <div class="formula">P(A ∪ B) = P(A) + P(B)</div>
+      </li>
+    </ul>
+
+    <h2>Teoremas y Reglas Fundamentales</h2>
+    <div class="ejemplo">
+      <strong>Adición:</strong> P(A ∪ B) = P(A) + P(B) - P(A ∩ B)
+    </div>
+
+    <h2>Ejemplos Resueltos en Logística</h2>
+    <div class="ejemplo">
+      <h3>Fallos en Envíos (ver axiomas)</h3>
+      Espacio muestral Ω: 100 envíos. A: 20 fallos por máquina (P(A)=0.20). B: 15 fallos por ruta (P(B)=0.15), disjuntos.
+      <div class="explanation">Aplicando axioma de la suma para disjuntos: P(A ∪ B) = 0.20 + 0.15 = 0.35. Estos cálculos confirman los axiomas y ayudan a priorizar inspecciones.</div>
+    </div>
+
+    <div class="ejemplo">
+      <h3>Retrasos en cadena de suministro</h3>
+      Total entregas: 50. A: 12 retrasos por clima (P(A)=0.24). B: 10 retrasos por tráfico (P(B)=0.20). Intersección: 4 (P(A ∩ B)=0.08).
+      <div class="explanation">P(A ∪ B) = 0.24 + 0.20 - 0.08 = 0.36 → 36% riesgo total. Complemento (sin retraso) = 0.64.</div>
+    </div>
+
+    <div class="ejemplo">
+      <h3>Máquinas defectuosas (teorema de probabilidad total)</h3>
+      M1 produce 70% artículos (10% defectuosos). M2 produce 30% (15% defectuosos).<br>
+      <div class="explanation">P(D) = 0.7×0.10 + 0.3×0.15 = 0.07 + 0.045 = 0.115 → 11.5% defectuosos.</div>
+    </div>
+
+    <h2>Video Explicativo del canal mates con Andres</h2>
+    <div class="video-container">
+      <iframe src="imagens/AxiomasVid.mp4"
+      title="Video de Probabilidad" 
+      frameborder="0" 
+      allowfullscreen>
+    </iframe>
+    </div>
+
+   
+    <div class="game-container" aria-live="polite">
+      <div class="game-title">Minijuego: Resuelve problemas de probabilidad</div>
+
+      <div class="game-box" id="gameProblem">Pulsa "Nuevo problema" para comenzar.</div>
+
+      <input type="text" id="gameAnswer" class="game-input" placeholder="Introduce tu respuesta (ej. 0.25 o 1/4)">
+
+      <div class="game-row">
+        <button class="game-button" id="btnCheck">Responder</button>
+        <button class="game-button secondary" id="btnNew">Nuevo problema</button>
+      </div>
+
+      <div class="game-result" id="gameResult"></div>
+      <div class="explanation" id="gameExplanation" style="display:none"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2025 – Probabilidad & Estadística Frutiger Aero
+  </footer>
+
+  <script>
+   
+    const problems = [
+    
+      {
+        id: 'moneda_cara',
+        text: 'Se lanza una moneda justa. ¿Probabilidad de obtener cara?',
+        answer: 0.5,
+        explanation: 'Una moneda justa tiene dos resultados equiprobables: 1/2 = 0.5.'
+      },
+      {
+        id: 'tres_monedas',
+        text: 'Se lanzan 3 monedas. ¿Probabilidad de obtener exactamente 2 caras?',
+        answer: 3/8,
+        explanation: 'Combinaciones favorables: 3. Total: 8. Resultado = 3/8 = 0.375.'
+      },
+      {
+        id: 'dado_par',
+        text: 'Un dado se lanza. ¿Probabilidad de obtener un número par?',
+        answer: 3/6,
+        explanation: 'Números pares: {2,4,6} → 3/6 = 1/2.'
+      },
+      {
+        id: 'urna_colores',
+        text: 'Una urna tiene 4 verdes, 4 rojas y 2 azules. ¿Probabilidad de sacar una azul?',
+        answer: 2/10,
+        explanation: 'Total 10 bolas, 2 azules: 2/10 = 0.2.'
+      },
+      {
+        id: 'retrasos_logistica',
+        text: 'En un día hay 40 entregas, 6 retrasadas. ¿Probabilidad de retraso?',
+        answer: 6/40,
+        explanation: '6/40 = 0.15 (15%).'
+      },
+      {
+        id: 'fallos_ruta',
+        text: 'De 200 entregas, 14 fallan por ruta. ¿Probabilidad de fallo por ruta?',
+        answer: 14/200,
+        explanation: '14/200 = 0.07.'
+      },
+      
+      {
+        id: 'dado_mayor4',
+        text: 'Un dado se lanza. ¿Cuál es la probabilidad de obtener un número mayor que 4?',
+        answer: 2/6,
+        explanation: 'Números favorables: {5,6} → 2 casos de 6 → 2/6 = 1/3 ≈ 0.3333.'
+      },
+      {
+        id: 'bolas_rojas',
+        text: 'Una caja tiene 3 bolas rojas y 2 azules. ¿Probabilidad de sacar una roja?',
+        answer: 3/5,
+        explanation: '3 bolas rojas de 5 totales → 3/5 = 0.6.'
+      },
+      {
+        id: 'envios_fallos',
+        text: 'De 100 envíos, 25 fallan. ¿Probabilidad de fallo?',
+        answer: 0.25,
+        explanation: '25/100 = 0.25.'
+      },
+      {
+        id: 'lote_defectuosas',
+        text: 'Un lote tiene 10 piezas, 2 defectuosas. ¿Probabilidad de seleccionar una defectuosa?',
+        answer: 2/10,
+        explanation: '2/10 = 0.2.'
+      },
+     
+      {
+        id: 'envios_maquinas',
+        text: 'En una planta: A produce 400 envases con 2% defectuosos (8 defectos), B 300 con 3% (9), C 300 con 5% (15). ¿Qué proporción de los defectos totales proviene de C?',
+        answer: 15 / (8+9+15),
+        explanation: 'Total defectuosos 8+9+15=32. Proporción de C = 15/32 ≈ 0.46875 → 46.875%.'
+      }
+    ];
+
+
+    let currentProblem = null;
+
+    
+    function parseUserInput(input) {
+      input = input.trim();
+      if (!input) return NaN;
+     
+      const fracMatch = input.match(/^\s*(\d+)\s*\/\s*(\d+)\s*$/);
+      if (fracMatch) {
+        const num = parseFloat(fracMatch[1]);
+        const den = parseFloat(fracMatch[2]);
+        if (den === 0) return NaN;
+        return num / den;
+      }
+      
+      const number = parseFloat(input.replace(',', '.'));
+      return isNaN(number) ? NaN : number;
+    }
+
+    function newProblem() {
+      const chosen = problems[Math.floor(Math.random() * problems.length)];
+      currentProblem = chosen;
+      document.getElementById('gameProblem').innerText = chosen.text;
+      document.getElementById('gameResult').innerText = '';
+      document.getElementById('gameExplanation').style.display = 'none';
+      document.getElementById('gameExplanation').innerText = '';
+      document.getElementById('gameAnswer').value = '';
+      document.getElementById('gameAnswer').focus();
+    }
+
+    function nearlyEqual(a, b, eps = 1e-6) {
+      return Math.abs(a - b) <= eps;
+    }
+
+    function checkAnswer() {
+      const raw = document.getElementById('gameAnswer').value;
+      const userVal = parseUserInput(raw);
+      const resultEl = document.getElementById('gameResult');
+      const explEl = document.getElementById('gameExplanation');
+
+      if (isNaN(userVal)) {
+        resultEl.innerText = 'Entrada no válida. Introduce un número decimal (ej. 0.25) o fracción (ej. 1/4).';
+        resultEl.style.color = '#b00020';
+        explEl.style.display = 'none';
+        return;
+      }
+
+      const correct = currentProblem.answer;
+
+      
+      const eps = 1e-6;
+      const isCorrect = nearlyEqual(userVal, correct, eps) || nearlyEqual(userVal, correct, Math.abs(correct) * 1e-3 + eps);
+
+      if (isCorrect) {
+        resultEl.innerText = '¡Correcto!';
+        resultEl.style.color = '#007700';
+        explEl.style.display = 'block';
+        explEl.innerText = 'Explicación: ' + currentProblem.explanation;
+      } else {
+        resultEl.innerText = 'Incorrecto. Intenta de nuevo o pulsa "Mostrar solución".';
+        resultEl.style.color = '#b00020';
+        explEl.style.display = 'none';
+      }
+    }
+
+    function showSolution() {
+      const explEl = document.getElementById('gameExplanation');
+      const resultEl = document.getElementById('gameResult');
+      explEl.style.display = 'block';
+      explEl.innerText = 'Solución: ' + (typeof currentProblem.answer === 'number' ? (Math.round(currentProblem.answer * 100000) / 100000) : currentProblem.answer) + '\n\n' + 'Explicación: ' + currentProblem.explanation;
+      resultEl.innerText = '';
+    }
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('btnNew').addEventListener('click', newProblem);
+      document.getElementById('btnCheck').addEventListener('click', checkAnswer);
+
+      
+      const showBtn = document.createElement('button');
+      showBtn.className = 'game-button secondary';
+      showBtn.style.marginTop = '0.6rem';
+      showBtn.innerText = 'Mostrar solución';
+      showBtn.addEventListener('click', showSolution);
+      document.querySelector('.game-row').appendChild(showBtn);
+
+      
+      newProblem();
+    });
+
+   
+    (function runTests(){
+      console.log('Test parseUserInput: 1/4 ->', parseUserInput('1/4'), 'expected 0.25');
+      console.log('Test parseUserInput: 0.5 ->', parseUserInput('0.5'), 'expected 0.5');
+      console.log('Test nearlyEqual:', nearlyEqual(0.3333333, 1/3));
+    })();
+  </script>
+</body>
+</html>

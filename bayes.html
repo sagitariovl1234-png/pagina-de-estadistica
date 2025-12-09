@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+  <title>Teorema de Bayes Aquarius</title>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+   
+    :root{
+      --azul-encarta:#224488;
+      --azul-xp:#0e2a52;
+      --panel:#f4f4f4;
+      --accent:#c76bff;
+    }
+    body{font-family: Tahoma, Geneva, sans-serif; background: linear-gradient(#cfe4ff,#eaf1ff 60%); margin:0; color:#102237;}
+    #container{width:94%;max-width:1100px;margin:18px auto;border:3px solid var(--azul-encarta);background:#fff;box-shadow: 0 6px 20px rgba(0,0,0,0.25);}
+    header{background:linear-gradient(#0055e5,#003d99);color:#fff;padding:18px;border-bottom:3px solid #002d73;display:flex;align-items:center;justify-content:space-between}
+    header h1{margin:0;font-size:24px;letter-spacing:0.5px}
+    .nav-buttons{display:flex;gap:10px}
+    .nav-buttons a{background:#e9e7ff;padding:7px 12px;border-radius:6px;border:2px solid #cfc8ff;color:var(--azul-xp);text-decoration:none;font-weight:700;box-shadow:inset 1px 1px #fff}
+    .nav-buttons a:hover{background:#d6caff;border-color:#a47aff;color:#fff}
+
+    main{padding:18px}
+    .card{background:var(--panel);border:1px solid #ddd;padding:16px;border-radius:8px;margin-bottom:16px}
+    h2{color:var(--azul-xp);margin-top:0}
+    pre{background:#fff;padding:10px;border:1px solid #ccc;border-radius:6px;overflow:auto}
+    .code-box{background:#fff;border-left:5px solid var(--azul-encarta);padding:10px;margin:10px 0;border-radius:6px}
+
+    .controls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .control{background:#fff;padding:10px;border-radius:8px;border:1px solid #e0e0e0}
+    label{display:block;font-weight:700;margin-bottom:6px}
+    input[type=range]{width:100%}
+    output{display:block;margin-top:6px;font-weight:700;color:var(--azul-xp)}
+
+    .chart-wrap{background:#fff;padding:12px;border-radius:8px;border:1px solid #e0e0e0}
+
+    
+    .xp-window{position:fixed;right:20px;top:20px;width:320px;background:#efe9d6;border:2px solid #003c74;box-shadow:3px 3px 8px rgba(0,0,0,0.35);display:none}
+    .xp-window .hdr{background:linear-gradient(#2a6ad1,#1a4a92);color:#fff;padding:6px;font-weight:700}
+    .xp-window .body{padding:8px}
+    .xp-window button{margin-top:8px}
+
+    footer{padding:12px;text-align:center;color:#123}
+
+    @media (max-width:800px){.controls{grid-template-columns:1fr}.chart-wrap canvas{width:100%!important;height:auto!important}}
+  </style>
+
+ 
+
+<body>
+  <div id="container">
+    <header>
+      <h1>Teorema de Bayes</h1>
+      <nav class="nav-buttons">
+        <a href="menu.html">Menu</a>
+        <a href="finito.html">espacio finito equiprobable</a>
+        <a href="axiomas.html">axiomas y teoremas</a>
+        <a href="ejercicios.html">Ejercicios</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>I. Fundamentos del Teorema de Bayes</h2>
+        <p>El Teorema de Bayes es una herramienta matemática que permite <strong>actualizar una probabilidad inicial</strong> (probabilidad <em>previa</em> o <em>prior</em>) cuando aparece nueva información o evidencia. Se utiliza cuando el espacio muestral se divide en varias hipótesis <strong>mutuamente excluyentes</strong> <code>A₁, A₂, ..., Aₙ</code>, y ocurre un evento observado <code>B</code>. El objetivo es calcular cuál hipótesis se vuelve más probable dada la nueva evidencia.</p>
+        <p>En esencia, Bayes mide: "¿Ahora que sé <code>B</code>, qué tan probable es que haya ocurrido <code>Aᵢ</code>?"</p>
+
+        <div class="code-box">P(Aᵢ | B) = [ P(B | Aᵢ) · P(Aᵢ ) ] / Σₖ [ P(B | Aₖ) · P(Aₖ ) ]</div>
+        <p>Esta fórmula resume el proceso de razonamiento bajo incertidumbre: comparar qué tan bien cada hipótesis explica la evidencia, multiplicarlo por lo probable que ya era cada hipótesis, y normalizar el resultado.</p>
+      </section>
+
+      <section class="card">
+        <h2>II. Componentes del Teorema</h2>
+        <ul>
+          <li><strong>P(Aᵢ) — Probabilidad previa (prior):</strong> Es la probabilidad que se asigna a una hipótesis <em>antes</em> de ver la evidencia. Ejemplo: la proporción de productos provenientes de un proveedor.</li>
+
+          <li><strong>P(B | Aᵢ) — Verosimilitud:</strong> Indica la probabilidad de observar la evidencia <code>B</code> suponiendo que la hipótesis <code>Aᵢ</code> fuera cierta. Ejemplo: porcentaje de defectos <em>dado</em> un proveedor.</li>
+
+          <li><strong>Denominador (probabilidad total de la evidencia):</strong> Representa la probabilidad total de que ocurra <code>B</code>. Se calcula sumando los aportes de todas las hipótesis:
+            <div class="code-box">P(B) = Σₖ P(B | Aₖ) · P(Aₖ)</div>
+            Este valor sirve como factor de normalización para asegurar que las probabilidades posteriores sumen 1.
+          </li>
+
+          <li><strong>P(Aᵢ | B) — Probabilidad posterior:</strong> La probabilidad actualizada de la hipótesis después de observar la evidencia. Esta es la salida final del teorema.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>III. Aplicaciones Generales</h2>
+        <p>El Teorema de Bayes se utiliza en múltiples áreas para tomar decisiones bajo incertidumbre. Algunas aplicaciones incluyen:</p>
+        <ul>
+          <li>Diagnóstico médico (evaluar causas probables dados síntomas).</li>
+          <li>Control de calidad y manufactura.</li>
+          <li>Seguridad informática (detección de intrusiones y anomalías).</li>
+          <li>Análisis de riesgo en cadenas de suministro.</li>
+          <li>Predicciones de mercado.</li>
+          <li>Clasificación automática y aprendizaje automático.</li>
+        </ul>
+        <p>En <strong>logística</strong>, Bayes permite identificar cuál causa es más probable ante un evento observado: defectos, retrasos, fallas de transporte, errores de inventario, entre otros.</p>
+      </section>
+
+      <section class="card">
+        <h2>IV. Ejemplos Resueltos (resumen)</h2>
+        <p>A continuación se muestran dos resultados finales (los cálculos detallados aparecen en secciones posteriores):</p>
+        <div class="code-box">
+          <strong>Televisores defectuosos:</strong> P(A3 | D) ≈ 0.32 (probabilidad de que el defecto provenga del proveedor 3).<br>
+          <strong>Predicción de mercado:</strong> P(A3 | B) ≈ 0.4942 (probabilidad actualizada de escenario económico).</div>
+      </section>
+
+      <section class="card" id="logistica">
+        <h2>V. Uso del Teorema de Bayes en Logística (explicación extendida)</h2>
+
+        <h3>Ejemplo 1 — Control de calidad entre proveedores</h3>
+        <p>Una empresa compra productos de tres proveedores distintos. Cada proveedor tiene una proporción diferente de participación y una tasa característica de defectos:</p>
+        <ul>
+          <li>A: 50% del total, defectos del 2%</li>
+          <li>B: 30% del total, defectos del 4%</li>
+          <li>C: 20% del total, defectos del 5%</li>
+        </ul>
+        <p>Si se encuentra un producto defectuoso, queremos saber cuál proveedor es el más probable origen del defecto.</p>
+        <div class="code-box">
+          P(D) = 0.02·0.50 + 0.04·0.30 + 0.05·0.20 = 0.032<br>
+          P(C | D) = (0.05·0.20) / 0.032 ≈ 0.3125
+        </div>
+        <p>Interpretación: aunque el proveedor C solo aporta el 20% del total, su mayor tasa de defectos hace que sea el más probable culpable al observar un defecto.</p>
+
+        <h3>Ejemplo 2 — Retrasos por tipo de ruta</h3>
+        <p>Supongamos dos rutas posibles de entrega:</p>
+        <ul>
+          <li><strong>R1:</strong> utilizada 60% de las veces, probabilidad de retraso 3%.</li>
+          <li><strong>R2:</strong> utilizada 40% de las veces, probabilidad de retraso 5%.</li>
+        </ul>
+        <p>Se observa un retraso. Queremos saber cuál ruta es más probable que haya sido utilizada.</p>
+        <div class="code-box">
+          P(R) = 0.03·0.6 + 0.05·0.4 = 0.038<br>
+          P(R2 | R) = 0.05·0.4 / 0.038 ≈ 0.5263
+        </div>
+        <p>Interpretación: aunque R1 se usa más, la mayor tasa de retrasos en R2 hace que sea ligeramente más probable responsable del retraso observado.</p>
+      </section>
+
+    </main>
+
+      <section class="card">
+        <h2>II. Componentes</h2>
+        <ul>
+          <li><strong>P(A_i)</strong>: prior (prob. previa de la hipótesis)</li>
+          <li><strong>P(B|A_i)</strong>: verosimilitud (prob. de la evidencia si la hipótesis es cierta)</li>
+          <li><strong>Denominador</strong>: probabilidad total de la evidencia P(B) = Σ P(B|A_k)P(A_k)</li>
+          <li><strong>P(A_i|B)</strong>: prob. posterior (actualizada)</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>III. Aplicaciones (resumen)</h2>
+        <p>Bayes se usa en diagnóstico, control de calidad, detección de intrusiones, análisis de proveedores, enrutamiento y predicción — en logística se aplica para identificar la causa más probable ante evidencia observada (defectos, retrasos, incidencias) y priorizar acciones.</p>
+      </section>
+
+      <section class="card">
+        <h2>IV. Ejemplos Resueltos (resumen)</h2>
+        <div class="code-box">
+          <strong>Televisores defectuosos (resultado):</strong> P(A3|B) ≈ 0.32<br>
+          <strong>Predicción mercado (resultado):</strong> P(A3|B) ≈ 0.4942
+        </div>
+      </section>
+
+      <section class="card" id="logistica">
+        <h2>V. Uso del Teorema de Bayes en Logística (ejemplos detallados)</h2>
+
+        <h3>Ejemplo 1 — Control de calidad (proveedores)</h3>
+        <p>Tres proveedores A,B,C: P(A)=0.50 (2% defectos), P(B)=0.30 (4%), P(C)=0.20 (5%). Lote defectuoso observado → calcular P(C|D).</p>
+        <div class="code-box">P(D)=0.02·0.50 + 0.04·0.30 + 0.05·0.20 = 0.032<br>P(C|D) = 0.05·0.20 / 0.032 ≈ 0.3125</div>
+
+        <h3>Ejemplo 2 — Retrasos por ruta</h3>
+        <div class="code-box">R1: 60% tráfico (3% retrasos), R2: 40% (5% retrasos).<br>P(R)=0.03·0.6 + 0.05·0.4 = 0.038<br>P(R2|R)=0.05·0.4/0.038 ≈ 0.5263</div>
+
+        <p>Interpretación: Bayes ayuda a priorizar auditorías, rutas o proveedores según la evidencia observada.</p>
+
+        <hr>
+        <h3>Interactivo: modifica priors y verosimilitudes</h3>
+        <p>Prueba cambiar los valores y observa cómo varían las probabilidades posteriores.</p>
+
+        <div class="controls" aria-label="Controles Bayes">
+          <div class="control">
+            <label>Prior A (%) <output id="outPA">50</output></label>
+            <input id="pA" type="range" min="0" max="100" value="50" oninput="updateValues()">
+            <label>Lik. P(D|A) (%) <output id="outLA">2</output></label>
+            <input id="lA" type="range" min="0" max="100" value="2" oninput="updateValues()">
+          </div>
+
+          <div class="control">
+            <label>Prior B (%) <output id="outPB">30</output></label>
+            <input id="pB" type="range" min="0" max="100" value="30" oninput="updateValues()">
+            <label>Lik. P(D|B) (%) <output id="outLB">4</output></label>
+            <input id="lB" type="range" min="0" max="100" value="4" oninput="updateValues()">
+          </div>
+
+          <div class="control">
+            <label>Prior C (%) <output id="outPC">20</output></label>
+            <input id="pC" type="range" min="0" max="100" value="20" oninput="updateValues()">
+            <label>Lik. P(D|C) (%) <output id="outLC">5</output></label>
+            <input id="lC" type="range" min="0" max="100" value="5" oninput="updateValues()">
+          </div>
+        </div>
+
+        <div style="margin-top:12px" class="chart-wrap">
+          <canvas id="bayesChart" aria-label="Gráfico barras Bayes"></canvas>
+        </div>
+
+        <div style="margin-top:10px; text-align:center">
+          <button class="nav-buttons game-btn" onclick="resetExample()">Resetar valores</button>
+        </div>
+
+      </section>
+
+      <section class="card">
+        <h2>Video Explicativo de monitor fantasma</h2>
+        <div style="position:relative;padding-bottom:40.25%;height:0;overflow:hidden;border-radius:8px">
+          <iframe
+          width="560"
+          height="315" 
+          src="imagens/bayesVid.mp4" 
+          frameborder="0" 
+          allowfullscreen style="position:absolute;left:0;top:0;width:100%;height:100%;border:3px solid var(--azul-encarta);box-shadow:0 0 8px rgba(0,0,0,0.25);"
+          allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      informacion extraida de Estadística, P. y. (2023, July 30). ▷ Teorema de Bayes. Probabilidad Y Estadística. https://www.probabilidadyestadistica.net/teorema-de-bayes/
+    </footer>
+
+  </div>
+
+  <div id="tipWindow" class="xp-window" role="dialog" aria-hidden="true">
+    <div class="hdr">Tip Encarta</div>
+    <div class="body">
+      <p>Prueba mover los sliders para ver cómo cambian las probabilidades a posteriori. Pulsa "Resetar" para devolver los valores iniciales.</p>
+      <button onclick="cerrarTip()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+
+    const ctx = document.getElementById('bayesChart').getContext('2d');
+
+    function computePosteriors(pa, pb, pc, la, lb, lc){
+ 
+      const wA = la*pa;
+      const wB = lb*pb;
+      const wC = lc*pc;
+      const denom = wA + wB + wC;
+      if(denom === 0) return [0,0,0];
+      return [wA/denom, wB/denom, wC/denom];
+    }
+
+    // Create Chart.js bar chart
+    const bayesChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['P(A|D)','P(B|D)','P(C|D)'],
+        datasets: [{
+          label: 'Probabilidades a posteriori',
+          data: [0.3125,0.3125,0.3125],
+          backgroundColor: ['#224488','#1a4a92','#6f4cc8']
+        }]
+      },
+      options: {
+        responsive:true,
+        scales: { y: { beginAtZero:true, max:1 } },
+        plugins: { legend: { display:false } }
+      }
+    });
+
+  
+    const pA = document.getElementById('pA'); const pB = document.getElementById('pB'); const pC = document.getElementById('pC');
+    const lA = document.getElementById('lA'); const lB = document.getElementById('lB'); const lC = document.getElementById('lC');
+    const outPA = document.getElementById('outPA'); const outPB = document.getElementById('outPB'); const outPC = document.getElementById('outPC');
+    const outLA = document.getElementById('outLA'); const outLB = document.getElementById('outLB'); const outLC = document.getElementById('outLC');
+
+    function updateValues(){
+
+      const paVal = Number(pA.value)/100; const pbVal = Number(pB.value)/100; const pcVal = Number(pC.value)/100;
+      const laVal = Number(lA.value)/100; const lbVal = Number(lB.value)/100; const lcVal = Number(lC.value)/100;
+
+
+      outPA.value = pA.value; outPB.value = pB.value; outPC.value = pC.value;
+      outLA.value = lA.value; outLB.value = lB.value; outLC.value = lC.value;
+
+      const sumP = paVal+pbVal+pcVal;
+      let paNorm = paVal, pbNorm = pbVal, pcNorm = pcVal;
+      if(sumP>0){ paNorm = paVal/sumP; pbNorm = pbVal/sumP; pcNorm = pcVal/sumP; }
+
+      const post = computePosteriors(paNorm,pbNorm,pcNorm,laVal,lbVal,lcVal);
+ 
+      bayesChart.data.datasets[0].data = post.map(v=>round(v,4));
+      bayesChart.update();
+    }
+
+    function resetExample(){
+      pA.value='50'; pB.value='30'; pC.value='20'; lA.value='2'; lB.value='4'; lC.value='5';
+      updateValues();
+    }
+
+
+    resetExample();
+  </script>
+
+</body>
+</html>

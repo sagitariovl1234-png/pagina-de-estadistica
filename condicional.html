@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+<title>Probabilidad Condicional e Independencia</title>
+<style>
+
+body {
+    background: radial-gradient(circle at top, #d4f4ff, #9ad7ff, #6ac2ff, #2da7ff);
+    color: #111112;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+h1, h2, h3 {
+    color: #10527c;
+    text-shadow: 0 2px 6px rgba(0, 138, 255, 0.5),
+                 0 -1px 4px rgba(255, 255, 255, 0.6);
+}
+
+
+.neon-box {
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: 
+        0 4px 12px rgba(0, 64, 128, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.formula {
+    font-size: 1.2rem;
+    color: #006eff;
+    text-shadow: 0 0 4px rgba(0, 110, 255, 0.35);
+}
+
+a {
+    color: #00aaff;
+    text-shadow: 0 0 4px rgba(0, 140, 255, 0.4);
+    font-weight: bold;
+}
+
+
+.divider {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 195, 255, 0.7),
+        transparent
+    );
+    margin: 30px 0;
+    border-radius: 2px;
+}
+
+
+header nav a {
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #e4f4ff 40%,
+        #cde9ff 100%
+    );
+    padding: 8px 16px;
+    margin: 0 8px;
+    border: 1px solid #a7c7dd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #003b5c;
+    font-weight: bold;
+    font-family: "Segoe UI", sans-serif;
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 3px 6px rgba(0, 80, 135, 0.25);
+    transition: all 0.2s ease-in-out;
+}
+
+header nav a:hover {
+    background: linear-gradient(
+        180deg,
+        #ffffff,
+        #f8fcff,
+        #e6f4ff
+    );
+    border-color: #5b9bcc;
+    transform: translateY(-2px);
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 5px 10px rgba(0, 80, 135, 0.35);
+}
+
+header nav a:active {
+    background: linear-gradient(#d0ecff, #b9dcf7);
+    transform: translateY(1px);
+    box-shadow:
+        inset 0 2px 3px rgba(0, 80, 135, 0.4);
+}
+
+#simulador-monedas {
+    margin-top: 40px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 90, 140, 0.25),
+                inset 0 1px rgba(255, 255, 255, 0.8);
+}
+
+
+#simulador-monedas input {
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #b7dbff;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 1px 2px rgba(144, 205, 255, 0.792);
+    margin-right: 10px;
+}
+
+#simulador-monedas button {
+    padding: 10px 18px;
+    background: linear-gradient(#e1f5ff, #bde6ff);
+    border: 1px solid #7fc9ff;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #004b66;
+    text-shadow: 0 1px 1px #ffffff;
+    box-shadow: 0 3px 6px rgba(152, 184, 204, 0.933);
+    transition: 0.25s;
+}
+
+#simulador-monedas button:hover {
+    background: linear-gradient(#ffffff, #d9f0ff);
+    transform: scale(1.05);
+}
+
+
+#chart-container {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 14px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 12px rgba(100,180,255,0.4);
+}
+
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<header class="w-full p-4 bg-black/60 backdrop-blur-lg flex justify-between items-center border-b border-cyan-400/40">
+  <h1 class="text-cyan-300 text-xl font-bold tracking-wide">Probabilidad Condicional e Independencia</h1>
+  <nav class="flex gap-6 text-cyan-200 text-sm">
+    <a href="#intro">Introducción</a>
+    <a href="#condicional">Prob. Condicional</a>
+    <a href="#independencia">Independencia</a>
+    <a href="#ejemplos">Ejemplos</a>
+    <a href="#simuladores">Simuladores</a>
+  </nav>
+</header>
+  
+<body>
+
+  <h1>introduccion teorica</h1>
+
+  <section id="intro" class="neon-box">
+    <h2>Introducción Completa</h2>
+    <p>La probabilidad condicional es uno de los pilares centrales de la teoría de la probabilidad. Permite actualizar nuestras creencias cuando recibimos información nueva. Su papel es esencial en logística, predicción, análisis de riesgos, cadenas de suministro y procesos industriales.</p>
+    <p>Se emplea cuando queremos medir la probabilidad de que ocurra un evento A sabiendo que ya ocurrió otro evento B. Esto reduce el espacio muestral y refina el análisis.</p>
+  </section>
+
+  <section id="condicional" class="neon-box">
+    <h2>Probabilidad Condicional</h2>
+    <p>Definición: Probabilidad de que ocurra un evento A dado que ya ocurrió un evento B. Se representa como <span class="formula">P(A|B)</span>.</p>
+    <p><strong>Fórmula matemática:</strong></p>
+    <p class="formula">P(A|B) = P(A ∩ B) / P(B)</p>
+    <p>Esto se interpreta como la proporción de veces que ambos eventos suceden, comparado con el total de veces que sucede el evento condicionante.</p>
+    <h3>Ejemplo General</h3>
+    <p>Si lanzamos dos dados, la probabilidad de que la suma sea 7 sabiendo que el primer dado muestra 3 se calcula reduciendo los casos posibles.</p>
+  </section>
+
+  <section id="independencia" class="neon-box">
+    <h2>Independencia de Eventos</h2>
+    <p>Dos eventos A y B son independientes cuando uno no afecta la probabilidad del otro.</p>
+    <p class="formula">P(A ∩ B) = P(A) · P(B)</p>
+    <p>En este caso, conocer uno no aporta información adicional sobre el otro.</p>
+  </section>
+
+  <section class="neon-box">
+    <h2>imagen representativa</h2>
+    <p><center><img src="imagens/PROBABILIDAD_CONDICIONAL.png" width="600" height="450" ></center></p>
+  </section>
+
+  <section id="ejemplos" class="neon-box">
+    <h2>Ejemplos Logísticos</h2>
+    <h3>Probabilidad Condicional en Logística</h3>
+    <p>En una empresa de transporte, supongamos:</p>
+    <ul>
+      <li>60% pide más tiempo de entrega (A)</li>
+      <li>68% pide áreas de descanso (B)</li>
+      <li>35% piden ambas (A ∩ B)</li>
+    </ul>
+    <p>Entonces:</p>
+    <p class="formula">P(A|B) = 0.35 / 0.68 ≈ 0.515</p>
+    <p>Esto indica que el 51.5% de quienes piden áreas de descanso también solicitan más tiempo.</p>
+
+    <h3>Independencia en Logística</h3>
+    <p>Si fallos de máquina (A) ocurren con probabilidad 0.1 y fallos en rutas (B) con 0.15, y se comportan como sucesos independientes:</p>
+    <p class="formula">P(A ∩ B) = 0.1 · 0.15 = 0.015</p>
+    <p>Esto ayuda a estimar riesgos dobles y asignación de recursos.</p>
+
+    <h3>Aplicación Práctica</h3>
+    <p>Los modelos logísticos emplean probabilidad condicional en:</p>
+    <ul>
+      <li>Teorema de Bayes aplicado a proveedores defectuosos.</li>
+      <li>Predicción de retrasos por clima vs tráfico.</li>
+      <li>Optimización de rutas considerando interdependencia de riesgos.</li>
+    </ul>
+
+    <h3 class="neon-box"> imagen representativa</h3>
+    <p><center><img src="imagens/logisticaMUNDO.jpg" width="600" height="450" ></center></p>
+  </section>
+
+
+  <section id="video" class="neon-box">
+    <h2>Video Explicativo celeste elizabeth baltazar lopez</h2>
+    <div>
+         <center><iframe
+          width="560"
+          height="315"
+          src="imagens/condiVId.mp4"
+          tittle="Diagrma de arbol"
+          frameborder="0"
+          allow="autoplay; encrypted-media;"
+          allowfullscreen>
+          </iframe></center>
+    </div>
+  </section>
+
+
+ 
+  <section id="simuladores" class="neon-box">
+    <h2>Simulador de Monedas</h2>
+    <p>El usuario elige cuántas monedas lanzar y el sistema genera una gráfica comparando el número de <strong>águilas</strong> y <strong>soles</strong>.</p>
+
+    <div id="simulador-monedas">
+      <label for="numMonedas">Cantidad de monedas a lanzar:</label>
+      <input type="number" id="numMonedas" min="1" value="10" />
+      <button onclick="simularMonedas()">Lanzar</button>
+
+      <div id="chart-container">
+        <canvas id="coinChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    let coinChart;
+
+    function simularMonedas() {
+        const n = parseInt(document.getElementById('numMonedas').value);
+        if (isNaN(n) || n <= 0) return alert("Ingresa un número válido");
+
+        let aguilas = 0;
+        let soles = 0;
+
+        for (let i = 0; i < n; i++) {
+            if (Math.random() < 0.5) aguilas++;
+            else soles++;
+        }
+
+        const data = {
+            labels: ['Águilas', 'Soles'],
+            datasets: [{
+                label: 'Resultados',
+                data: [aguilas, soles],
+                borderWidth: 2
+            }]
+        };
+
+        if (coinChart) coinChart.destroy();
+
+        const ctx = document.getElementById('coinChart').getContext('2d');
+        coinChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    }
+  </script>
+
+    <section id="minijuego-probabilidad" class="retro-panel">
+  <h2>Minijuego Interactivo: Probabilidad Condicional e Independencia</h2>
+  <p>Responde cada pregunta y obtén retroalimentación inmediata. Algunas preguntas requieren que calcules probabilidades, otras que identifiques si dos eventos son independientes.</p>
+
+  <div id="juego-container">
+    <div id="pregunta"></div>
+
+    <input type="text" id="respuesta" placeholder="Escribe tu respuesta aquí..." />
+    <button id="verificar">Verificar</button>
+
+    <div id="resultado"></div>
+  </div>
+</section>
+
+<script>
+  const preguntas = [
+    {
+      texto: "Si P(A)=0.4, P(B)=0.5 y P(A∩B)=0.2, ¿cuánto vale P(A|B)?",
+      respuesta: "0.4"
+    },
+    {
+      texto: "En logística, 30% de envíos se retrasan (A), 25% vienen dañados (B), y 10% sufren ambas fallas. Calcula P(A|B).",
+      respuesta: "0.4"
+    },
+    {
+      texto: "Si P(A∩B) = P(A)·P(B), ¿cómo se llama esta propiedad?",
+      respuesta: "independencia"
+    },
+    {
+      texto: "Un proveedor falla 12% de las veces. La ruta falla 12% también. Si ambos fallan 1.44%, ¿son independientes? (sí/no)",
+      respuesta: "sí"
+    },
+    {
+      texto: "Si P(A∩B)=0.05 y P(B)=0.25, calcula P(A|B).",
+      respuesta: "0.2"
+    }
+  ];
+
+  let actual = 0;
+
+  function mostrarPregunta() {
+    document.getElementById('pregunta').innerText = preguntas[actual].texto;
+  }
+
+  document.getElementById('verificar').addEventListener('click', () => {
+    const user = document.getElementById('respuesta').value.trim().toLowerCase();
+    const correcta = preguntas[actual].respuesta.toLowerCase();
+
+    if (user === correcta) {
+      document.getElementById('resultado').innerHTML = "<span class='correcto'>✔ ¡Correcto!</span>";
+    } else {
+      document.getElementById('resultado').innerHTML = `❌ Incorrecto. La respuesta correcta es: <strong>${preguntas[actual].respuesta}</strong>`;
+    }
+
+    actual = (actual + 1) % preguntas.length;
+    setTimeout(() => {
+      document.getElementById('respuesta').value = "";
+      document.getElementById('resultado').innerHTML = "";
+      mostrarPregunta();
+    }, 1500);
+  });
+
+  mostrarPregunta();
+</script>
+
+<style>
+  #minijuego-probabilidad {
+    margin-top: 20px;
+    padding: 15px;
+    border: 3px solid #1a4ba3;
+    background: #76b2c1;
+    border-radius: 6px;
+    box-shadow: 0 0 8px #8fe1ff inset;
+  }
+
+  #juego-container input {
+    padding: 8px;
+    width: 80%;
+    margin: 10px 0;
+    border: 2px solid #88a0d8;
+    border-radius: 4px;
+    font-size: 15px;
+  }
+
+  #juego-container button {
+    background: #214791;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #juego-container button:hover {
+    background: #2c53a3;
+  }
+
+  .correcto {
+    color: green;
+    font-weight: bold;
+  }
+</style>
+
+<footer>
+  Capítulo 3 Probabilidad Condicional e Independencia 3.1. Introducción. (n.d.). https://www.cimat.mx/~jortega/MaterialDidactico/EPyE09/Cap3.pdf
+</footer>
+
+</body>
+</html>

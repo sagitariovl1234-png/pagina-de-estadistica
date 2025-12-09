@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Principio Multiplicativo</title>
+  <style>
+    /* --- ESTILO RETRO 2010 MEJORADO: GLOSSY + 3D + TIPOGRAFÍA CLÁSICA --- */
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Verdana, Arial, sans-serif;
+      background: #c8c8c8 url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+      color: #000;
+    }
+
+    header {
+      width: 100%;
+      background: linear-gradient(#4a8ad4, #2a5f99);
+      padding: 20px 0;
+      border-bottom: 5px solid #c00;
+      box-shadow: 0 0 14px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    .header-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      font-family: 'Trebuchet MS', Tahoma, sans-serif;
+      text-shadow: 3px 3px 5px #000;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* FILA DE BOTONES */
+    .nav-row {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* BOTONES GLOSSY 2010 */
+    .nav-btn {
+      padding: 10px 22px;
+      background: linear-gradient(#ffffff, #d0d0d0 40%, #b0b0b0);
+      border: 3px solid #888;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: Verdana, sans-serif;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: inset 0 1px 6px #fff, inset 0 -2px 6px rgba(0,0,0,0.3), 0 0 8px rgba(0,0,0,0.4);
+      transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: linear-gradient(#ffffff, #e6e6e6 40%, #cfcfcf);
+      border-color: #1f4c7a;
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 8px #fff, 0 0 12px rgba(0,0,0,0.5);
+    }
+
+    .nav-btn:active {
+      background: linear-gradient(#cfcfcf, #fdfdfd);
+      transform: translateY(1px);
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+    }
+
+    /* CONTENEDOR CON BORDE 3D */
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px 60px;
+      background: #ffffff;
+      border: 4px ridge #999;
+      border-radius: 6px;
+      box-shadow: 0 0 16px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      color: #1f4c7a;
+      font-size: 24px;
+      border-bottom: 3px solid #c00;
+      padding-bottom: 6px;
+      font-family: 'Trebuchet MS', Tahoma, sans-serif;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #000;
+      font-family: Verdana, sans-serif;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    /* CAJAS DE EJEMPLO CON EFECTO 3D */
+    .example-box {
+      background: #f8f8f8;
+      border: 3px groove #888;
+      padding: 16px;
+      border-radius: 6px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.25);
+      margin-top: 18px;
+    }
+
+    /* FORMULAS CON ESTILO RETRO */
+    .formula {
+      font-family: 'Courier New', monospace;
+      background: #e0e0e0;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 3px inset #999;
+      display: inline-block;
+      margin-bottom: 12px;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+    }
+
+  
+
+    /* ESTILO PARA PIEZAS ARRASTRABLES */
+    .pieza {
+      padding: 6px 12px;
+      background: #e0e0e0;
+      border: 3px outset #777;
+      border-radius: 6px;
+      font-family: Tahoma, sans-serif;
+      cursor: grab;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+      user-select: none;
+      display: inline-block;
+    }
+
+    .pieza:active {
+      cursor: grabbing;
+      box-shadow: inset 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* ESTILO PARA LOS ESPACIOS VACÍOS */
+    .drop {
+      display: inline-block;
+      width: 100px;
+      padding: 4px;
+      background: #f0f0f0;
+      border: 3px inset #888;
+      border-radius: 4px;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      color: #444;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="header-title">Principio Multiplicativo</span>
+  <div class="nav-row">
+    <a href="menu.html" class="nav-btn">Menu</a>
+    <a href="conteo.html" class="nav-btn">Técnicas de conteo</a>
+    <a href="Venn.html" class="nav-btn">diagrama de venn</a>
+    <a href="muestral.html" class="nav-btn">Espacio Muestral</a>
+  </div>
+</header>
+
+<div class="container">
+
+  <h2>¿Qué es el Principio Multiplicativo?</h2>
+  <p>El principio multiplicativo establece que si una actividad se compone de <strong>r pasos</strong>, donde cada paso puede realizarse de <strong>N₁, N₂, ..., Nᵣ</strong> maneras respectivamente, entonces la actividad completa puede efectuarse de:</p>
+
+  <div class="formula">N₁ × N₂ × ... × Nᵣ</div>
+
+  <p>Este principio aplica cuando <strong>todos los pasos deben ocurrir</strong> y se ejecutan <strong>de manera sucesiva</strong>.</p>
+
+  <h2>Ejemplo 1 — Construcción de una casa</h2>
+  <div class="example-box">
+    <p>Un albañil quiere construir una casa. Cada sección se puede realizar de distintas formas:</p>
+    <ul>
+      <li>Cimientos: 2 maneras</li>
+      <li>Paredes: 3 maneras</li>
+      <li>Techo: 2 maneras</li>
+      <li>Acabados: 1 manera</li>
+    </ul>
+    <p><strong>Total:</strong> 2 × 3 × 2 × 1 = <strong>12 maneras</strong> de construir la casa.</p>
+  </div>
+
+  <h2>imagen representativa</h2>
+  <div class="example-box">
+    <center><img src="imagens/principio multiplicativo.png" width="450" height="300"></center>
+  </div>
+
+  <h2>Ejemplo 2 — Placas de automóvil</h2>
+  <div class="example-box">
+    <p>Una placa debe tener 3 letras y 4 números. Si se permiten repeticiones:</p>
+    <p><strong>26 × 26 × 26 × 10 × 10 × 10 × 10 = 75,760,000 placas posibles</strong></p>
+  </div>
+
+  <h2>Ejemplo 3 — Números telefónicos</h2>
+  <div class="example-box">
+    <p>Un número telefónico tiene 6 dígitos, ninguno puede iniciar con 0:</p>
+    <p><strong>9 × 10 × 10 × 10 × 10 × 10 = 900,000 números posibles</strong></p>
+  </div>
+
+  <div class="example-box">
+<h2>video explicativo del canal math2me
+</h2>
+<center><iframe 
+width="560"
+height="315" 
+src="https://rr1---sn-uvu5a2a5t-bqae7.googlevideo.com/videoplayback?expire=1765295825&ei=cfI3aZmnMa3PkucPssjLqA8&ip=82.26.212.179&id=o-ANyIa-85bTDNR8mXFHgLaky2wFkVr48xZuY0qNynXiKj&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&rms=au%2Cau&bui=AYUSA3Az-PJC0Q4Mve51NYVWkp6z5SKmwwmBYmwwccbC9NYNef7nrfT5bjzFJw5eyEGmUa0Il9HTjUY3&spc=wH4QqxZ9lAlxnJD7eFTpturwqVdoH9-8G7Kx1S2RotiU_8rNMdSmDjqkisJEZeX0YOE&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=13700242&ratebypass=yes&dur=323.314&lmt=1753522864701663&fexp=51552689,51565116,51565682,51580968&c=ANDROID&txp=5318224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRQIhAKmVcWwM7k0c3z1W95S5Z9JTai6xd3ohqaWz-29wOstaAiAqFtOyYXgkSnZq7lmaPywcJ684IJRzuchD54XirAs1vQ%3D%3D&redirect_counter=1&rm=sn-q4fel77l&rrc=104&req_id=8fa639d35a4ea3ee&cms_redirect=yes&cmsv=e&cps=0&ipbypass=yes&met=1765274240,&mh=6G&mip=2806:2f0:6241:e1e3:6125:404d:989a:29e&mm=31&mn=sn-uvu5a2a5t-bqae7&ms=au&mt=1765273792&mv=m&mvi=1&pl=52&lsparams=cps,ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=APaTxxMwRQIhAO1fd3r1y3Cte-_kgLZmqaPkaluEiHKW8spko-TipNCbAiAKMGbyB0_eVKxa9w_2wGJzqXcE3l9hB6dBQSgXVIJhNw%3D%3D" 
+title="principio multiplicativo" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe></center>
+</div>
+    
+  <h2>Ejemplo 4 — Logística en Línea de Producción</h2>
+  <div class="example-box">
+    <p>En una fábrica de electrónicos en el Bajío que ensambla smartphones, el flujo de producción se divide en tres etapas independientes:</p>
+    <ul>
+      <li><strong>Etapa 1 – Montaje de placa:</strong> 4 líneas disponibles</li>
+      <li><strong>Etapa 2 – Instalación de pantalla:</strong> 3 líneas disponibles</li>
+      <li><strong>Etapa 3 – Empaquetado y etiquetado:</strong> 5 líneas disponibles</li>
+    </ul>
+    <p>Aplicando el principio multiplicativo:</p>
+    <div class="formula">4 × 3 × 5 = 60</div>
+    <p>Esto significa que existen <strong>60 rutas posibles</strong> para que un producto avance a través de la fábrica, permitiendo planificar capacidades, evitar cuellos de botella y distribuir mejor los recursos.</p>
+  </div>
+
+  <h2>Ejemplo 5 — Distribución y Envíos</h2>
+  <div class="example-box">
+    <p>En un sistema de entregas regionales para e‑commerce en México, las etapas son:</p>
+    <ul>
+      <li><strong>Etapa 1 – Vehículos:</strong> 2 camiones disponibles</li>
+      <li><strong>Etapa 2 – Rutas por camión:</strong> 3 rutas distintas</li>
+      <li><strong>Etapa 3 – Horarios de entrega:</strong> 4 opciones por ruta</li>
+    </ul>
+    <p>Aplicando el principio multiplicativo:</p>
+    <div class="formula">2 × 3 × 4 = 24</div>
+    <p>En total existen <strong>24 combinaciones</strong> posibles de entrega. Esto ayuda a optimizar costos, tiempos y asignación de recursos, especialmente bajo métodos de control de inventario como FIFO y LIFO.</p>
+  </div>
+
+  
+  <h2>imagen representativa</h2>
+  <div class="example-box" style="text-align:center;">
+    <img src="imagens/principio-multiplicativo coins.png" style="image-rendering: pixelated; width:350px; height: 250; border:3px solid #555;">
+    <p style="margin-top:10px; font-family: 'Courier New', monospace;">Representacion del principio multiplicativo lanzando monedas</p>
+  </div>
+
+  <h2>Minijuego Logístico — ¿Cuántas rutas hay?</h2>
+  <div class="example-box">
+    <p><strong>Escenario:</strong> Una empresa usa:<br>
+    – 3 centros de distribución<br>
+    – 4 rutas por centro<br>
+    – 2 horarios por ruta<br>
+    ¿Cuántas combinaciones totales existen?</p>
+
+    <input id="respuestaJuego" type="number" placeholder="Escribe tu respuesta" style="padding:8px; border:3px inset #999; width:160px; font-family:Verdana;">
+    <button onclick="evaluarJuego()" class="nav-btn" style="margin-left:10px;">Comprobar</button>
+
+    <p id="resultadoJuego" style="margin-top:12px; font-weight:bold;"></p>
+  </div>
+
+  <script>
+    function evaluarJuego(){
+      const input = document.getElementById('respuestaJuego').value;
+      const correcta = 3 * 4 * 2; 
+      const salida = document.getElementById('resultadoJuego');
+
+      if(Number(input) === correcta){
+        salida.innerHTML = "✔️ <span style='color:green;'>¡Bien hecho! Has aplicado el principio multiplicativo correctamente.</span>";
+      } else {
+        salida.innerHTML = "❌ <span style='color:red;'>Respuesta incorrecta.</span><br>Recuerda: 3 centros × 4 rutas × 2 horarios = <strong>24</strong>.";
+      }
+    }
+  </script>
+
+  
+  <h2>Minijuego — Completa las Frases del Principio Multiplicativo</h2>
+  <div class="example-box">
+    <p>Arrastra las palabras correctas para completar las frases del principio multiplicativo:</p>
+
+    <div style="margin-bottom:12px; font-weight:bold;">Banco de palabras:</div>
+    <div id="palabras" style="display:flex; gap:10px; flex-wrap:wrap;">
+      <span class="pieza" draggable="true">producto</span>
+      <span class="pieza" draggable="true">etapas</span>
+      <span class="pieza" draggable="true">independientes</span>
+      <span class="pieza" draggable="true">multiplicar</span>
+      <span class="pieza" draggable="true">opciones</span>
+    </div>
+
+    <br>
+
+    <p>El principio multiplicativo indica que si un proceso tiene varias <span class="drop" data-correcto="etapas">[____]</span> y cada una es <span class="drop" data-correcto="independientes">[____]</span>, entonces debemos <span class="drop" data-correcto="multiplicar">[____]</span> sus <span class="drop" data-correcto="opciones">[____]</span> para obtener el <span class="drop" data-correcto="producto">[____]</span> total.</p>
+
+    <p id="resultadoFrases" style="margin-top:12px; font-weight:bold;"></p>
+
+  
+    <p id="progresoFrases" style="margin-top:6px; font-weight:bold; color:#1f4c7a;">Progreso: 0 / 5 correctas</p>
+
+ 
+    <button onclick="resetFrases()" class="nav-btn" style="margin-top:10px;">Resetear</button>
+  </div>
+
+  <script>
+    const piezas = document.querySelectorAll('.pieza');
+    const drops = document.querySelectorAll('.drop');
+    let arrastrada = null;
+
+    piezas.forEach(p => {
+      p.addEventListener('dragstart', () => { arrastrada = p; });
+      p.addEventListener('dragend', () => { arrastrada = null; });
+    });
+
+    drops.forEach(d => {
+      d.addEventListener('dragover', e => e.preventDefault());
+      d.addEventListener('drop', function(){
+        if(arrastrada){ this.textContent = arrastrada.textContent; this.setAttribute('data-valor', arrastrada.textContent); }
+        verificarFrases();
+      });
+    });
+
+    function verificarFrases(){
+      let correcto = true;
+      drops.forEach(d => {
+        if(d.getAttribute('data-valor') !== d.getAttribute('data-correcto')){
+          correcto = false;
+        }
+      });
+
+      const salida = document.getElementById('resultadoFrases');
+      if(correcto){
+        salida.innerHTML = "✔️ <span style='color:green;'>¡Excelente! Completaste correctamente las frases.</span>";
+      } else {
+        salida.innerHTML = "Aún hay errores, revisa las palabras colocadas.";
+      }
+    }
+  function actualizarProgreso(){
+      let conteo = 0;
+      drops.forEach(d => {
+        if(d.getAttribute('data-valor') === d.getAttribute('data-correcto')){
+          conteo++;
+        }
+      });
+      document.getElementById('progresoFrases').textContent = "Progreso: " + conteo + " / 5 correctas";
+    }
+
+    function resetFrases(){
+      drops.forEach(d => {
+        d.textContent = "[____]";
+        d.removeAttribute('data-valor');
+      });
+      document.getElementById('resultadoFrases').textContent = "";
+      actualizarProgreso();
+    }
+
+    
+    const oldVerificar = verificarFrases;
+    verificarFrases = function(){
+      oldVerificar();
+      actualizarProgreso();
+    }
+  </script>
+</div>
+
+
+<footer style="width:100%; background:#cfcfcf; color:#000; padding:20px 0; text-align:center; margin-top:40px; border-top:4px solid #c00; font-family: Verdana;">
+  <p style="max-width:800px; margin:auto; font-size:14px; line-height:1.5;">
+    Referencia (APA 7):<br>
+    Teachy. (s.f.). <em>Desentrañando el principio multiplicativo: Aplicaciones prácticas y teóricas</em>. Recuperado de https://teachy.ai/es/resumenes/educacion-media/media-superior-2-grado/matematicas-a-espanol/desentranando-el-principio-multiplicativo-aplicaciones-practicas-y-teoricas-e4f4f
+  </p>
+</footer>
+
+</body>
+</html>

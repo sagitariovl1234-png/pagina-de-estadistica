@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Menú Principal – Proyecto Aquarius</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --glass: rgba(255, 255, 255, 0.35);
+    --border-glass: rgba(255, 255, 255, 0.45);
+    --blur: blur(14px);
+    --gradient-aero: linear-gradient(135deg, #00d4ff 0%, #6a5cff 50%, #ff4df0 100%);
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(160deg, #a1c4fd 0%, #c2e9fb 100%);
+    overflow-x: hidden;
+    animation: fadeIn 1.2s ease;
+  }
+
+  @keyframes fadeIn {0% {opacity:0;} 100% {opacity:1;}}
+
+  /* Burbujas estilo Frutiger Aero */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    backdrop-filter: blur(30px);
+    background: var(--glass);
+    border: 1px solid var(--border-glass);
+    animation: float 12s infinite ease-in-out;
+  }
+  @keyframes float {
+    0% {transform: translateY(0) scale(1);} 
+    50% {transform: translateY(-60px) scale(1.15);} 
+    100% {transform: translateY(0) scale(1);} 
+  }
+
+  h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 48px;
+    background: var(--gradient-aero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    animation: slideDown 1s ease;
+  }
+  @keyframes slideDown {0% {opacity:0; transform:translateY(-20px);} 100% {opacity:1; transform:translateY(0);} }
+
+  .topbar {
+    width: 100%;
+    padding: 18px 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: var(--blur);
+    border-bottom: 1px solid var(--border-glass);
+    animation: fadeIn 1.5s ease;
+  }
+
+  .topbtn {
+    padding: 10px 22px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #003;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: var(--blur);
+    border: 2px solid rgba(255,255,255,0.65);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .topbtn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  .grid {
+    max-width: 950px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    padding: 10px;
+  }
+
+  .button {
+    padding: 22px;
+    text-align: center;
+    background: rgba(255,255,255,0.35);
+    border: 1px solid var(--border-glass);
+    border-radius: 18px;
+    backdrop-filter: var(--blur);
+    cursor: pointer;
+    font-size: 17px;
+    color: #002;
+    font-weight: 600;
+    transition: 0.25s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    animation: fadeUp 0.8s ease;
+  }
+
+  @keyframes fadeUp {0% {opacity:0; transform:translateY(20px);} 100% {opacity:1; transform:translateY(0);} }
+
+  .button:hover {
+    transform: translateY(-5px) scale(1.03);
+    background: rgba(255,255,255,0.55);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.18);
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Burbujas decorativas -->
+  <div class="bubble" style="width:180px;height:180px;top:80px;left:40px;"></div>
+  <div class="bubble" style="width:260px;height:260px;bottom:60px;right:50px; animation-delay:1.5s"></div>
+  <div class="bubble" style="width:140px;height:140px;bottom:30%;left:20%; animation-delay:0.8s"></div>
+
+  <header class="topbar">
+    <div class="topbtn" onclick="go('contacto.html')">Contáctanos</div>
+    <div class="topbtn" onclick="go('proyecto.html')">Nuestro Proyecto</div>
+    <div class="topbtn" onclick="go('info.html')">Información</div>
+  </header>
+
+  <h1>Menú Principal</h1>
+
+  <div class="grid">
+    <div class="button" onclick="go('conjuntos.html')">Conjuntos y definiciones</div>
+    <div class="button" onclick="go('venn.html')">Diagrama de Venn</div>
+    <div class="button" onclick="go('leyes.html')">Leyes Conmutativa, Asociativa y Distributiva</div>
+    <div class="button" onclick="go('arbol.html')">Diagrama de Árbol</div>
+    <div class="button" onclick="go('muestral.html')">Espacio muestral</div>
+    <div class="button" onclick="go('Eventos.html')">Tipos de Evento</div>
+    <div class="button" onclick="go('conteo.html')">Técnicas de Conteo</div>
+    <div class="button" onclick="go('bayes.html')">Teorema de Bayes</div>
+    <div class="button" onclick="go('multiplicativo.html')">Principio multiplicativo</div>
+    <div class="button" onclick="go('aditivo.html')">Principio aditivo</div>
+    <div class="button" onclick="go('permutacion.html')">Permutaciones y combinaciones</div>
+    <div class="button" onclick="go('muestral y eventos.html')">Espacio muestral y eventos</div>
+    <div class="button" onclick="go('testU2.html')">Test de los conjuntos</div>
+    <div class="button" onclick="go('clasico.html')">Concepto clásico</div>
+    <div class="button" onclick="go('axiomas.html')">Axiomas y teoremas</div>
+    <div class="button" onclick="go('finito.html')">Espacio finito equiprobable</div>
+    <div class="button" onclick="go('condicional.html')">Probabilidad condicional</div>
+    <div class="button" onclick="go('marginal.html')">Distribución marginal conjunta</div>
+  </div>
+
+<script>
+  function go(url) {
+    const btns = document.querySelectorAll('.button, .topbtn');
+    btns.forEach(b => b.style.pointerEvents = 'none');
+    setTimeout(() => { window.location.href = url; }, 200);
+  }
+</script>
+
+</body>
+</html>

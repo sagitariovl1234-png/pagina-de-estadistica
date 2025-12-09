@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+<title>Tipos de Eventos en Probabilidad Aquarius</title>
+<style>
+
+body{
+    margin:0;
+    font-family:"Segoe UI",sans-serif;
+    background:linear-gradient(135deg,#c2ecff,#e8f8ff,#d5e9ff);
+    color:#003b5c;
+}
+
+
+header{
+    position:sticky;
+    top:0;
+    padding:14px 35px;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+
+    background:rgba(255,255,255,0.45);
+    backdrop-filter:blur(22px) saturate(185%);
+
+    border-bottom:1px solid rgba(255,255,255,0.7);
+    box-shadow:
+        0 2px 12px rgba(0,100,170,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+
+header a{
+    text-decoration:none;
+    color:#005c8f;
+    font-weight:600;
+    font-size:17px;
+
+    padding:10px 22px;
+    border-radius:12px;
+
+    background:linear-gradient(
+        180deg,
+        rgba(255,255,255,0.9),
+        rgba(220,245,255,0.75)
+    );
+
+    border:1px solid rgba(180,220,255,0.8);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,1),
+        0 4px 10px rgba(0,100,170,0.25);
+
+    transition:0.25s ease;
+}
+
+
+header a:hover{
+    background:linear-gradient(
+        180deg,
+        #ffffff,
+        #e8f6ff
+    );
+    color:#007acc;
+
+    transform:translateY(-3px);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,1),
+        0 6px 16px rgba(0,120,190,0.35);
+}
+
+
+header a:active{
+    transform:translateY(1px);
+    background:linear-gradient(#d6edff,#c2e4ff);
+    box-shadow:inset 0 2px 4px rgba(0,80,150,0.35);
+}
+
+
+.section{
+    width:85%;
+    margin:auto;
+    margin-top:40px;
+    padding:30px;
+    border-radius:22px;
+
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(25px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.8);
+
+    box-shadow:0 6px 18px rgba(0,90,140,0.25);
+}
+
+h1{
+    text-align:center;
+    font-size:45px;
+    color:#006fbf;
+    text-shadow:0 2px 6px rgba(0,110,180,0.25);
+}
+h2{
+    color:#005d99;
+    font-size:30px;
+}
+p{
+    font-size:18px;
+    line-height:1.7;
+    color:#003b5c;
+}
+
+
+.event-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:20px;
+    margin-top:20px;
+}
+.card{
+    background:rgba(255,255,255,0.75);
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 4px 14px rgba(0,100,180,0.18);
+}
+.card img{
+    width:100%;
+    border-radius:15px;
+    margin-bottom:10px;
+}
+
+.quiz{
+    background:rgba(255,255,255,0.65);
+    border-radius:18px;
+    padding:30px;
+    margin-top:35px;
+    text-align:center;
+    backdrop-filter:blur(15px);
+    box-shadow:0 4px 12px rgba(0,80,140,0.25);
+}
+
+button{
+    background:linear-gradient(#d9f0ff,#bce2ff);
+    border:1px solid #8bcaff;
+    padding:10px 25px;
+    border-radius:10px;
+    font-size:17px;
+    color:#004766;
+    font-weight:600;
+    box-shadow:0 3px 6px rgba(0,80,135,0.25);
+    margin:8px;
+    transition:0.25s;
+}
+button:hover{
+    background:linear-gradient(#ffffff,#d7eefe);
+    transform:scale(1.08);
+}
+#resultado{
+    margin-top:15px;
+    font-size:22px;
+    font-weight:600;
+    color:#005a8f;
+}
+
+
+.video-box{
+    position:relative;
+    width:80%;
+    margin:35px auto;
+    padding-bottom:56.25%;
+    border-radius:20px;
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(15px);
+}
+.video-box iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border-radius:20px;
+}
+</style>
+
+</head>
+<body>
+<header>
+ <a href="menu.html">Menú Principal</a>
+ <a href="espacio.html">Espacio Muestral</a>
+ <a href="arbol.html">Diagrama de Árbol</a>
+</header>
+<h1>Tipos de Eventos en Probabilidad</h1>
+<div class="section"><h2>Concepto General</h2><p>Los eventos son resultados o conjuntos de resultados dentro de un experimento aleatorio. Según su relación, pueden clasificarse en simples, compuestos, dependientes, independientes, mutuamente excluyentes, seguros o imposibles.</p></div>
+<div class="section">
+    <center><h2> imagen representativa</h2>
+        <img src="imagens/tipos de eventos.jpg" width="600" height="450"></center>
+</div>
+<div class="section event-grid">
+<div class="card" style="transition:.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+<h3>P(E)=1/n</h3>
+<p><strong>Evento Simple</strong><br>Un único resultado posible.</p>
+</div>
+<div class="card" style="transition:.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+<h3>P(E)=k/n</h3>
+<p><strong>Evento Compuesto</strong><br>Incluye varios resultados.</p>
+</div>
+<div class="card" style="transition:.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+<h3>P(A ∩ B)=P(A)·P(B|A)</h3>
+<p><strong>Dependientes</strong><br>Un evento afecta al siguiente.</p>
+</div>
+<div class="card" style="transition:.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+<h3>P(A ∩ B)=P(A)·P(B)</h3>
+<p><strong>Independientes</strong><br>No se influyen entre sí.</p>
+</div>
+<div class="card" style="transition:.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+<h3>P(A ∩ B)=0</h3>
+<p><strong>Mutuamente Excluyentes</strong><br>No pueden ocurrir al mismo tiempo.</p>
+</div>
+<div class="card" style="transition:.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+<h3>P(E)=1 / P(E)=0</h3>
+<p><strong>Seguro / Imposible</strong><br>Probabilidad absoluta o nula.</p>
+</div>
+</div>
+<div class="section"><h2>Ejemplo Logístico</h2><p>Una empresa logística opera tres rutas principales de distribución: <strong>Local (40%)</strong>, <strong>Nacional (35%)</strong> e <strong>Internacional (25%)</strong>. Además, se sabe que el 12% de los envíos presentan algún tipo de falla (retraso o daño). Dentro de los envíos fallados, el 55% pertenecen a la categoría Internacional.</p><p>Sea A = "El envío presenta falla" y B = "El envío es internacional". Entonces:</p><p><strong>P(A) = 0.12</strong><br><strong>P(B) = 0.25</strong><br><strong>P(A|B) = 0.55</strong></p><p>Para encontrar la probabilidad conjunta de que un paquete sea internacional y además presente falla usamos:</p><p><strong>P(A ∩ B) = P(A|B) × P(B)</strong></p><p>P(A ∩ B) = 0.55 × 0.25 = <strong>0.1375 = 13.75%</strong></p><p>Interpretación: si se selecciona un paquete al azar, existe casi un 14% de probabilidad de que sea internacional y llegue con algún tipo de falla. Esta información permite a la empresa tomar decisiones como reforzar inspecciones en aduanas, optimizar embalaje o cambiar proveedor de transporte internacional.</p></div>
+<div class="section quiz" id="quiz"></div>
+<script>
+let preguntas=[
+ {texto:"Al sacar una carta roja vuelve a sacarse otra sin sustituir",correcto:"dependiente",op:["dependiente","independiente","excluyente"]},
+ {texto:"Obtener número par al lanzar un dado",correcto:"compuesto",op:["simple","compuesto","seguro"]},
+ {texto:"Que un paquete sea Local o Nacional",correcto:"compuesto",op:["imposible","compuesto","dependiente"]},
+ {texto:"Obtener sol al lanzar una moneda",correcto:"no",op:["seguro","no"]},
+ {texto:"Seleccionar al azar un camión disponible para reparto",correcto:"simple",op:["simple","compuesto"]},
+ {texto:"Recibir carga dañada y retrasada simultáneamente",correcto:"dependiente",op:["dependiente","independiente","excluyente"]}
+];
+let i=0,score=0;
+function render(){if(i<preguntas.length){let q=preguntas[i];document.getElementById("quiz").innerHTML=`<h2>Pregunta ${i+1}</h2><p><strong>${q.texto}</strong></p>`+q.op.map(o=>`<button onclick=resp("${o}")>${o}</button>`).join("");}else{document.getElementById("quiz").innerHTML=`<h2>Resultado Final</h2><p>Tu puntuación: <strong>${score}/${preguntas.length}</strong></p><button onclick=reboot()>Reintentar</button>`;}}
+function resp(r){if(r===preguntas[i].correcto)score++;i++;render();}
+function reboot(){i=0;score=0;render();}
+render();
+</script>
+<div class="section">
+<h2>video explicativo de Ad-ya math</h2>
+<center><iframe 
+width="560"
+height="315" 
+src="" 
+title="tipos de eventos" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe></center>
+</div>
+<footer>
+    <li>Tipos de eventos- Unidad de Apoyo Para el Aprendizaje. (2017). Unam.mx. https://uapas1.bunam.unam.mx/matematicas/tipos_eventos/</li>
+    <li>Probabilidades: Tipos, Fórmula, Aplicación y Ejemplos Clave. (2025, August 13). Nueva Escuela Mexicana. https://nuevaescuelamexicana.org/probabilidades/</li>
+</footer>
+</body>
+</html>

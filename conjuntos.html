@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Probabilidad y Estadistica: la teoria de los conjuntos</title>
+  <meta name="description" content="Teoria de los conjuntos">
+  <link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+  <style>
+  
+    @font-face{font-family: 'FrutigerLike'; src: local('Frutiger'), local('Inter'), local('Segoe UI');}
+    :root{
+      --bg: linear-gradient(180deg, rgba(230,240,255,0.9), rgba(245,250,255,0.95));
+      --panel: rgba(255,255,255,0.6);
+      --glass: rgba(255,255,255,0.45);
+      --accent: rgba(64,120,255,0.95);
+      --muted: #4b5563;
+      --radius: 14px;
+      --blur: 14px;
+      --card-pad: 22px;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:FrutigerLike, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;background:var(--bg);}
+    .wrap{max-width:1100px;margin:36px auto;padding:28px;}
+
+    header{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+    .logo{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--accent), #7fb3ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 8px 30px rgba(64,120,255,0.12);font-size:22px}
+    h1{margin:0;font-size:26px}
+    p.lead{margin:2px 0 0;color:var(--muted)}
+
+    nav{display:flex;gap:10px;margin-top:14px}
+    .pill{background:var(--glass);backdrop-filter:blur(var(--blur));padding:8px 12px;border-radius:999px;font-size:14px;box-shadow:0 6px 18px rgba(20,40,80,0.06);text-decoration:none;color:#000;font-weight:500;cursor:pointer;}
+
+    main{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:22px}
+    .content{padding:18px;background:var(--panel);border-radius:var(--radius);box-shadow:0 12px 40px rgba(20,40,80,0.06);backdrop-filter: blur(var(--blur));}
+    .side{padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.5));border-radius:12px;height:fit-content}
+
+    section{margin-bottom:18px}
+    h2{font-size:18px;margin:0 0 8px}
+    .muted{color:var(--muted);font-size:14px}
+
+    .card{background:rgba(255,255,255,0.7);padding:var(--card-pad);border-radius:12px;margin-bottom:12px;box-shadow:0 8px 30px rgba(12,30,60,0.05)}
+    pre{background:rgba(10,20,40,0.03);padding:12px;border-radius:8px;overflow:auto}
+
+
+    .venn{display:flex;justify-content:center;padding:12px}
+    svg {max-width:100%;height:auto}
+
+
+    table{width:100%;border-collapse:collapse}
+    td,th{padding:8px;border-bottom:1px solid rgba(20,40,60,0.04);text-align:left}
+
+    footer{margin-top:18px;font-size:13px;color:var(--muted)}
+
+    .video-container {
+  width: 80%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.video-container video {
+  width: 100%;
+  border-radius: 30px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo"><img src="imagens/logo proyecto Aquarius.png" width="70"></div>
+      <div>
+        <h1>Teoria de los conjuntos</h1>
+        <p class="lead">Instituto tecnologico superior de Irapuato</p>
+        <nav>
+          <a class="pill" href="menu.html">menu principal</a>
+          <a class="pill" href="conteo.html">Conteo</a>
+          <a class="pill" href="probabilidad.html">Probabilidad</a>
+          <a class="pill" href="bayes.html">Bayes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <article class="content">
+        <section>
+          <h2>Teoría de Conjuntos</h2>
+          <div class="card">
+            <p class="muted">Definicion</p>
+            <p>Un conjunto es una colección de elementos. Normalmente están caracterizados por compartir alguna propiedad. Para que un conjunto esté bien definido debe ser posible discernir si un elemento arbitrario está o no en él.</p>
+            <p>Los conjuntos pueden definirse de manera explícita, citando todos los elementos de losque consta entre llaves, A={1,2,3,4,5}, o implícita, dando una o varias características que determinen si un elemento dado está o no en el conjunto, A={números naturales del 1 al 5}.</P>
+            <P>Los elementos de un conjunto no están ordenados, aunque vengan especificados comouna lista, por tanto A={3,1,2,5,4}. En una definición explícita no se pueden repetir elementos, así que {1,1,2,3,4,5} sería una manera incorrecta de expresar el conjunto A.</p>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-top:0">Definiciones de Operaciones: Unión, intersección, complemento, diferencia.</h3>
+            <p><strong>Unión de sucesos</strong> </p>
+            <P>Muchas veces necesitamos hallar la probabilidad de un suceso complejo, formado por varios sucesos simples. Cuando necesitamos que se cumpla al menos una de dos condiciones A y B, hablamos de la union de los sucesos A∪B. Si hace falta que se cumplan ambas condiciones, se trata de la interseccion de los sucesos A∩B. Las probabilidades de la union y la de la interseccion estan relacionadas con la siguiente formula:</P>
+            <p><strong> P(A∪B) =P(A)+P(B)−P(A∩B)</strong></p>
+            <P> Para entenderla basta echarle un vistazo al siguiente diagrama de Euler-Venn. Si sumamos las probabilidades P(A) + P(B), la parte central, P(A ∩ B), se cuenta dos veces, por lo que hay que restarla de la suma para llegar a la probabilidad de la union:</P>
+            <p><img src="imagens/AUB_P1.png" alt="imagen de referencia de como es el conjunto AUB" width="200" class="center"></p>
+            <p><strong>interseccion de sucesos</strong></p>
+            <P>A∩B está formado por los elementos que están simultáneamente en A y en B.</P>
+            <p><img src="imagens/ANB_P1.png" alt="" width="200"></p>
+            <p><strong>Diferencia de los sucesos</strong></p>
+            <P>A-B está formado por los elementos de A que no están en B</P>
+            <p><img src="imagens/Frutiger_diferencias.png" width="350"></p>
+            <P><strong>complementario de suceso</strong></P>
+            <P>Caballeroblanco:Cuando canto esta cancion todos llorano...
+            <P>Alicia: ¿O que?</P>
+            <P>Caballero blanco:O no lloran,naturalmente.</P>
+            <P><strong>non datur</strong> es un principio logico que afirma que o bien ocurre un suceso obien ocurre lo contrario. Esta mañana o me he tomado un cafe ono,no vale considerar opciones intermedias (aunque hayan entrado un par demoleculas de cafe en mi cuerpo debo considerar lo como que si me lo he tomado). Traduciendo este principio al lenguaje matematico tenemos</P>
+            <p><strong>A∪A=Verdad,Prob(A)+Prob(A)=1</strong></p>
+            <p>donde con A se detona el suceso contrario al sucesoA. Trabajar con con sucesos complementarios a menudo es mas comodo.</p>
+            <p><img src="imagens/complementario_retro.png" alt="Se verifica que A∩¯¯¯¯A=∅A∩A¯=∅ y A∪¯¯¯¯A=Ω." width="200"></p>
+          </div>
+
+           <style>
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    /* Mantener proporción 16:9 */
+    .video-wrapper::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+
+<h2>video explicativo de QuidiMat matematica con guillermo</h2>
+<iframe 
+width="560"
+height="315" 
+src="imagens/conjunVid.mp4" 
+title="YouTube video player" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe>
+ </div>
+
+
+          <div id="miniJuego" style="max-width:700px;margin:60px auto;padding:20px;
+background:rgba(255,255,255,0.4);backdrop-filter:blur(10px);
+border-radius:18px;box-shadow:0 4px 20px #0002;">
+
+  <h2 style="text-align:center;color:#003;
+  font-size:32px;margin-bottom:15px;">Mini-Juego: Teoría de Conjuntos</h2>
+
+  <div id="infoJuego" style="text-align:center;font-size:18px;margin-bottom:15px;">
+    <strong>Puntuación:</strong> <span id="score">0</span> |
+    <strong>Tiempo:</strong> <span id="timer">10</span>s
+  </div>
+
+  <div id="pregunta" style="font-size:22px;font-weight:600;margin-bottom:20px;text-align:center;">
+    Cargando pregunta...
+  </div>
+
+  <div id="opciones" style="display:grid;gap:12px;"></div>
+
+  <div id="resultado" style="text-align:center;font-size:20px;margin-top:20px;height:30px;"></div>
+
+  <button onclick="nuevaPregunta()" style="margin-top:20px;width:100%;padding:12px;
+  background:#6a5cff;border:none;border-radius:12px;color:white;font-size:18px;
+  cursor:pointer;transition:0.3s;">Siguiente pregunta</button>
+
+</div>
+
+<script>
+  const preguntas = [
+    {
+      p: "Si A = {1,2,3} y B = {3,4,5}, ¿cuál es A ∩ B?",
+      opciones: ["{3}", "{1,2,4,5}", "{1,2}"],
+      correcta: "{3}"
+    },
+    {
+      p: "El conjunto universal U es {1,2,3,4,5}. Si A = {2,5}, ¿cuál es A'?",
+      opciones: ["{1,3,4}", "{2,5}", "{1,2,4}"],
+      correcta: "{1,3,4}"
+    },
+    {
+      p: "Si A = {a,b,c} y B = {b,c,d,e}, ¿cuál es A ∪ B?",
+      opciones: ["{a,b,c,d,e}", "{b,c}", "{a,d,e}"],
+      correcta: "{a,b,c,d,e}"
+    },
+    {
+      p: "Si A = {1,2,3,4} y B = {3,4,5}, ¿cuál es A - B?",
+      opciones: ["{1,2}", "{3,4}", "{1,2,5}"],
+      correcta: "{1,2}"
+    },
+    {
+      p: "¿Cuál afirmación es verdadera?",
+      opciones: [
+        "El conjunto vacío está contenido en cualquier conjunto.",
+        "El conjunto vacío contiene un elemento.",
+        "Dos conjuntos iguales tienen diferente cardinalidad."
+      ],
+      correcta: "El conjunto vacío está contenido en cualquier conjunto."
+    },
+    {
+      p: "Si |A| = 4 y |B| = 3 y no comparten elementos, ¿cuánto vale |A ∪ B|?",
+      opciones: ["7", "12", "1"],
+      correcta: "7"
+    },
+    {
+      p: "Si A ⊆ B, significa que:",
+      opciones: [
+        "Todos los elementos de A están en B.",
+        "Todos los elementos de B están en A.",
+        "A y B no comparten elementos."
+      ],
+      correcta: "Todos los elementos de A están en B."
+    }
+  ];
+
+  let puntaje = 0;
+  let tiempo = 10;
+  let timerInterval;
+
+  function nuevaPregunta() {
+    clearInterval(timerInterval);
+    tiempo = 10;
+    document.getElementById("timer").textContent = tiempo;
+
+    const preguntaActual = preguntas[Math.floor(Math.random() * preguntas.length)];
+    document.getElementById("pregunta").textContent = preguntaActual.p;
+
+    const contOpciones = document.getElementById("opciones");
+    contOpciones.innerHTML = "";
+
+    preguntaActual.opciones.forEach(op => {
+      let btn = document.createElement("button");
+      btn.textContent = op;
+      btn.style = `
+        padding:14px;
+        border-radius:12px;
+        background:rgba(255,255,255,0.5);
+        backdrop-filter:blur(8px);
+        border:1px solid #fff7;
+        font-size:18px;
+        cursor:pointer;
+        transition:0.3s;
+      `;
+      btn.onmouseover = () => btn.style.transform = "scale(1.05)";
+      btn.onmouseout = () => btn.style.transform = "scale(1)";
+      btn.onclick = () => verificar(op, preguntaActual.correcta);
+      contOpciones.appendChild(btn);
+    });
+
+    timerInterval = setInterval(() => {
+      tiempo--;
+      document.getElementById("timer").textContent = tiempo;
+
+      if (tiempo <= 0) {
+        clearInterval(timerInterval);
+        mostrarResultado("Tiempo agotado ⏳", "red");
+      }
+    }, 1000);
+
+    document.getElementById("resultado").textContent = "";
+  }
+
+  function verificar(opcion, correcta) {
+    clearInterval(timerInterval);
+
+    if (opcion === correcta) {
+      puntaje++;
+      document.getElementById("score").textContent = puntaje;
+      mostrarResultado("✔ ¡Correcto!", "green");
+    } else {
+      mostrarResultado("✘ Incorrecto", "red");
+    }
+  }
+
+  function mostrarResultado(texto, color) {
+    const res = document.getElementById("resultado");
+    res.textContent = texto;
+    res.style.color = color;
+
+    res.style.animation = "none";
+    setTimeout(() => { res.style.animation = "fade 0.6s ease"; }, 10);
+
+  }
+
+</script>
+
+<style>
+@keyframes fade {
+  0% { opacity: 0; transform: scale(0.9);}
+  100% { opacity: 1; transform: scale(1);}
+}
+</style>
+
+          <footer>
+            <p>Contenido adaptado del material original proporcionado por el usuario. Para ver el documento fuente, consulte la referencia adjunta.</p>
+          </footer>
+        </article>
+
+<aside class="side">
+<div style="font-weight:700;margin-bottom:10px">Índice rápido</div>
+<div class="card"><strong>Conjuntos</strong><div class="muted">Definición, Unión, Intersección, Complemento</div></div>
+<div class="card"><strong>Conteo</strong><div class="muted">Multiplicación, Permutaciones, Combinaciones</div></div>
+<div class="card"><strong>Probabilidad</strong><div class="muted">Leyes, Condicional, Bayes</div></div>
+
+
+<div style="margin-top:10px;font-size:13px;color:var(--muted)">Créditos:</div>
+<div style="font-size:13px;color:var(--muted)">Material: Unidad 4 — Probabilidad y Teoría de Conjuntos.</div>
+</aside>
+
+          
+    </main>
+  </div>
+</body>
+</html>

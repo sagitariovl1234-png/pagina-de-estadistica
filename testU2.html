@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mega Test de los conjuntos</title>
+<style>
+  /* RENACIMIENTO: pergamino, serif, ornamentos suaves + animaciones sutiles */
+  @keyframes fadeInUp { from {opacity:0; transform:translateY(8px)} to {opacity:1; transform:none} }
+  body {
+    background: #f4efe2 url('https://upload.wikimedia.org/wikipedia/commons/0/09/Old_paper_background_texture.jpg');
+    font-family: "Garamond", serif;
+    padding: 20px;
+    color: #3a2f1b;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1, h2, h3 { text-align:center; margin-bottom:10px; }
+  .contenedor {
+    max-width:1000px; margin:auto; background:rgba(255,250,240,0.96);
+    border:4px double #6b553a; padding:26px; border-radius:14px; box-shadow:0 30px 60px rgba(0,0,0,0.18);
+    animation:fadeInUp .7s ease both;
+  }
+  .pregunta {
+    margin-bottom:20px; padding:14px; border-left:6px solid #6b553a; background:rgba(255,255,252,0.85); border-radius:8px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .pregunta:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(107,85,58,0.08); }
+  .opcion{ margin:8px 0; display:block; cursor:pointer; }
+
+  .minijuego{ border:2px dashed #6b553a; padding:18px; margin:18px 0; background:linear-gradient(180deg,#fffaf3,#fbf6ef); border-radius:10px }
+  .draggable{ display:inline-block; padding:8px 12px; margin:6px; background:#d4c29a; border:1px solid #6b553a; cursor:grab; border-radius:8px; transition:transform .12s ease }
+  .draggable:active{ transform:scale(.98) }
+  .dropzone{ display:inline-block; min-width:140px; min-height:38px; padding:8px; margin:6px; border:2px dotted #6b553a; background:#fffdf7; border-radius:8px; vertical-align:middle }
+
+  .btn { display:inline-block; background:#6b553a; color:#fff; border:none; padding:10px 14px; border-radius:8px; cursor:pointer; font-weight:700; margin:6px }
+  .btn.secondary{ background:#b89b6a; color:#1b1206 }
+
+  #resultModal{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%) scale(.8); background:rgba(255,254,250,0.98); padding:22px; border-radius:12px; box-shadow:0 30px 60px rgba(0,0,0,0.25); display:none; z-index:40; width:90%; max-width:520px }
+  #resultModal.show{ display:block; animation:pop .36s cubic-bezier(.2,.9,.2,1) both }
+  @keyframes pop{ from{opacity:0; transform:translate(-50%,-50%) scale(.85)} to{opacity:1; transform:translate(-50%,-50%) scale(1)} }
+
+  /* confetti canvas */
+  #confettiCanvas{ position:fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:30 }
+
+  textarea{ width:100%; min-height:86px; padding:10px; border-radius:8px; border:1px solid rgba(107,85,58,0.12); background:#fffefb }
+
+  .meta{ display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:6px }
+
+  /* responsive */
+  @media (max-width:600px){ .dropzone{ min-width:90px } .draggable{ padding:6px 10px } }
+  .nav-btn{
+    background:#8a6f4f;
+    color:#fff;
+    padding:10px 18px;
+    margin:6px;
+    border:none;
+    border-radius:10px;
+    font-family:"Garamond", serif;
+    font-weight:600;
+    cursor:pointer;
+    transition:transform .18s ease, background .2s ease;
+  }
+  .nav-btn:hover{
+    background:#a88a63;
+    transform:translateY(-3px);
+  }
+</style>
+</head>
+<body>
+<div class="contenedor" id="contenedor">
+  <h1>Mega Test de los conjuntos</h1>
+  <h3>Temas: Conjuntos, Técnicas de Conteo, Espacio Muestral y Eventos — Nivel Completo</h3>
+
+  <!-- Navegación -->
+  <div class="nav-buttons" style="text-align:center; margin:20px 0;">
+    <button class="nav-btn" onclick="location.href='menu.html'">Menu</button>
+    <button class="nav-btn" onclick="location.href='conjuntos.html'">Conjuntos</button>
+    <button class="nav-btn" onclick="location.href='muestral.html'">Espacio muestral</button>
+    <button class="nav-btn" onclick="location.href='permutacionhtml'">Permutaciones</button>
+  </div>
+
+  <!-- Multiple-choice expanded -->
+  <h2>Sección A — Opción múltiple (elige una)</h2>
+
+  <div class="pregunta" data-qid="p1">
+    <p><b>1. ¿Cuál es la definición correcta de conjunto?</b></p>
+    <label class="opcion"><input type="radio" name="p1"> A) Una colección desordenada sin propiedades.</label>
+    <label class="opcion"><input type="radio" name="p1"> B) Una colección bien definida de elementos.</label>
+    <label class="opcion"><input type="radio" name="p1"> C) Una lista de números siempre ordenados.</label>
+  </div>
+
+  <div class="pregunta" data-qid="p2">
+    <p><b>2. La unión de A y B (A ∪ B) es:</b></p>
+    <label class="opcion"><input type="radio" name="p2"> A) Solo los elementos comunes.</label>
+    <label class="opcion"><input type="radio" name="p2"> B) Todos los elementos de A y B.</label>
+    <label class="opcion"><input type="radio" name="p2"> C) Elementos de A pero no de B.</label>
+  </div>
+
+  <div class="pregunta" data-qid="p3">
+    <p><b>3. ¿Cuál es el complemento de A (A<sup>c</sup>) respecto a un universo U?</b></p>
+    <label class="opcion"><input type="radio" name="p3"> A) A ∪ U</label>
+    <label class="opcion"><input type="radio" name="p3"> B) Elementos de U que no están en A</label>
+    <label class="opcion"><input type="radio" name="p3"> C) A ∩ U</label>
+  </div>
+
+  <div class="pregunta" data-qid="p4">
+    <p><b>4. ¿Cuál ley describe que A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)?</b></p>
+    <label class="opcion"><input type="radio" name="p4"> A) Conmutativa</label>
+    <label class="opcion"><input type="radio" name="p4"> B) Distributiva</label>
+    <label class="opcion"><input type="radio" name="p4"> C) Asociativa</label>
+  </div>
+
+  <div class="pregunta" data-qid="p5">
+    <p><b>5. Si el espacio muestral S de lanzar un dado es {1,2,3,4,5,6}, ¿cuál es P({2,4}) si cada cara es equiprobable?</b></p>
+    <label class="opcion"><input type="radio" name="p5"> A) 1/6</label>
+    <label class="opcion"><input type="radio" name="p5"> B) 2/6</label>
+    <label class="opcion"><input type="radio" name="p5"> C) 3/6</label>
+  </div>
+
+  <div class="pregunta" data-qid="p6">
+    <p><b>6. Principio multiplicativo: Si hay 3 rutas de A→B y 4 rutas de B→C, ¿cuántas rutas A→C hay?</b></p>
+    <label class="opcion"><input type="radio" name="p6"> A) 7</label>
+    <label class="opcion"><input type="radio" name="p6"> B) 12</label>
+    <label class="opcion"><input type="radio" name="p6"> C) 3</label>
+  </div>
+
+  <div class="pregunta" data-qid="p7">
+    <p><b>7. Principio aditivo: Si hay 5 camiones de tipo A y 3 de tipo B y se elige un único camión, ¿cuántas opciones totales?</b></p>
+    <label class="opcion"><input type="radio" name="p7"> A) 8</label>
+    <label class="opcion"><input type="radio" name="p7"> B) 2</label>
+    <label class="opcion"><input type="radio" name="p7"> C) 15</label>
+  </div>
+
+  <div class="pregunta" data-qid="p8">
+    <p><b>8. ¿Cuántas permutaciones (orden importando) hay para 4 elementos distintos?</b></p>
+    <label class="opcion"><input type="radio" name="p8"> A) 4</label>
+    <label class="opcion"><input type="radio" name="p8"> B) 24</label>
+    <label class="opcion"><input type="radio" name="p8"> C) 12</label>
+  </div>
+
+  <div class="pregunta" data-qid="p9">
+    <p><b>9. ¿Qué técnica aplicarías para elegir 3 bodegas de 10 sin importar orden?</b></p>
+    <label class="opcion"><input type="radio" name="p9"> A) Permutaciones</label>
+    <label class="opcion"><input type="radio" name="p9"> B) Combinaciones</label>
+    <label class="opcion"><input type="radio" name="p9"> C) Principio multiplicativo</label>
+  </div>
+
+  <div class="pregunta" data-qid="p10">
+    <p><b>10. Permutación circular: para 6 personas alrededor de una mesa, ¿cuántas disposiciones distintas?</b></p>
+    <label class="opcion"><input type="radio" name="p10"> A) 6!</label>
+    <label class="opcion"><input type="radio" name="p10"> B) 5!</label>
+    <label class="opcion"><input type="radio" name="p10"> C) 4!</label>
+  </div>
+
+  <!-- Open questions -->
+  <h2>Sección B — Respuestas abiertas</h2>
+  <div class="pregunta" data-qid="o1">
+    <p><b>11. Explica qué es un diagrama de Venn y un ejemplo logístico de su uso.</b></p>
+    <textarea id="open1"></textarea>
+  </div>
+
+  <div class="pregunta" data-qid="o2">
+    <p><b>12. Describe el espacio muestral y un caso de evento compuesto en logística.</b></p>
+    <textarea id="open2"></textarea>
+  </div>
+
+  <div class="pregunta" data-qid="o3">
+    <p><b>13. Explica la diferencia entre permutación con repetición y sin repetición, con ejemplo.</b></p>
+    <textarea id="open3"></textarea>
+  </div>
+
+  <!-- Minijuego Orden -->
+  <h2>Sección C — Minijuegos interactivos</h2>
+  <div class="minijuego" id="minijuego1">
+    <p><b>14. Ordena estos pasos para una cadena de suministro (de izquierda a derecha):</b></p>
+    <div style="margin-bottom:8px">
+      <div class="draggable" draggable="true" data-id="recepcion">Recepción</div>
+      <div class="draggable" draggable="true" data-id="almacen">Almacén</div>
+      <div class="draggable" draggable="true" data-id="transporte">Transporte</div>
+      <div class="draggable" draggable="true" data-id="entrega">Entrega</div>
+    </div>
+    <div id="droprow1">
+      <div class="dropzone" data-pos="0"></div>
+      <div class="dropzone" data-pos="1"></div>
+      <div class="dropzone" data-pos="2"></div>
+      <div class="dropzone" data-pos="3"></div>
+    </div>
+    <div class="meta"><button class="btn" id="checkMini1">Comprobar orden</button><div id="mini1feedback"></div></div>
+  </div>
+
+  <!-- Minijuego Completar -->
+  <div class="minijuego" id="minijuego2">
+    <p><b>15. Completa: El principio ____ se usa cuando las alternativas son mutuamente excluyentes y se suman.</b></p>
+    <div style="margin:8px 0">
+      <div class="draggable" draggable="true" data-word="aditivo">aditivo</div>
+      <div class="draggable" draggable="true" data-word="multiplicativo">multiplicativo</div>
+      <div class="draggable" draggable="true" data-word="permutacion">permutación</div>
+    </div>
+    <div class="dropzone" id="dropMini2"></div>
+    <div class="meta"><button class="btn" id="checkMini2">Comprobar</button><div id="mini2feedback"></div></div>
+  </div>
+
+  <!-- More MCQs to be comprehensive -->
+  <h2>Sección D — Preguntas adicionales</h2>
+  <div class="pregunta" data-qid="p11">
+    <p><b>16. En un diagrama de árbol, cada rama representa:</b></p>
+    <label class="opcion"><input type="radio" name="p11"> A) Una operación matemática</label>
+    <label class="opcion"><input type="radio" name="p11"> B) Un posible resultado o decisión</label>
+    <label class="opcion"><input type="radio" name="p11"> C) Un subconjunto vacío</label>
+  </div>
+
+  <div class="pregunta" data-qid="p12">
+    <p><b>17. Si en un experimento hay 2 eventos mutuamente excluyentes A y B, P(A ∪ B) =</b></p>
+    <label class="opcion"><input type="radio" name="p12"> A) P(A) · P(B)</label>
+    <label class="opcion"><input type="radio" name="p12"> B) P(A) + P(B)</label>
+    <label class="opcion"><input type="radio" name="p12"> C) P(A) / P(B)</label>
+  </div>
+
+  <div class="pregunta" data-qid="p13">
+    <p><b>18. ¿Cuál es la diferencia entre intersección y diferencia de conjuntos?</b></p>
+    <label class="opcion"><input type="radio" name="p13"> A) Intersección son elementos comunes; diferencia son elementos de A no en B</label>
+    <label class="opcion"><input type="radio" name="p13"> B) Intersección es suma; diferencia es multiplicación</label>
+    <label class="opcion"><input type="radio" name="p13"> C) No hay diferencia</label>
+  </div>
+
+  <div class="pregunta" data-qid="p14">
+    <p><b>19. ¿Qué representa el espacio muestral para un experimento aleatorio?</b></p>
+    <label class="opcion"><input type="radio" name="p14"> A) El conjunto de todos los resultados posibles</label>
+    <label class="opcion"><input type="radio" name="p14"> B) Un solo resultado</label>
+    <label class="opcion"><input type="radio" name="p14"> C) Solo eventos imposibles</label>
+  </div>
+
+  <div class="pregunta" data-qid="p15">
+    <p><b>20. En logística, ¿qué es más apropiado usar para ordenar secuencias (rutas) cuando el orden afecta tiempo?</b></p>
+    <label class="opcion"><input type="radio" name="p15"> A) Combinaciones</label>
+    <label class="opcion"><input type="radio" name="p15"> B) Permutaciones</label>
+    <label class="opcion"><input type="radio" name="p15"> C) Ninguno</label>
+  </div>
+
+  <div style="text-align:center;margin-top:18px">
+    <button class="btn" id="finishBtn">Terminar Test</button>
+    <button class="btn secondary" id="resetBtn">Reiniciar</button>
+  </div>
+
+</div>
+
+<!-- result modal and confetti canvas -->
+<canvas id="confettiCanvas"></canvas>
+<div id="resultModal">
+  <h2>Resultados del Test</h2>
+  <p id="scoreText"></p>
+  <p id="noteText" style="color:#5b4a35"></p>
+  <div style="text-align:right;margin-top:12px"><button class="btn" id="closeResult">Cerrar</button></div>
+</div>
+
+<script>
+// --- Drag & drop logic generalized ---
+const draggables = document.querySelectorAll('.draggable');
+const dropzones = document.querySelectorAll('.dropzone');
+let dragged = null;
+
+draggables.forEach(d => {
+  d.addEventListener('dragstart', e => { dragged = e.target; e.dataTransfer.setData('text/plain', 'drag'); });
+  d.addEventListener('touchstart', e => { dragged = e.target; });
+});
+
+dropzones.forEach(z => {
+  z.addEventListener('dragover', e => e.preventDefault());
+  z.addEventListener('drop', e => { e.preventDefault(); if(dragged) z.appendChild(dragged); });
+});
+
+// --- Mini1: check order ---
+document.getElementById('checkMini1').addEventListener('click', ()=>{
+  const correct = ['recepcion','almacen','transporte','entrega'];
+  const filled = Array.from(document.querySelectorAll('#droprow1 .dropzone')).map(z=> z.firstElementChild ? z.firstElementChild.dataset.id : null);
+  const ok = filled.every((v,i)=> v===correct[i]);
+  const fb = document.getElementById('mini1feedback');
+  fb.textContent = ok ? '✔ Orden correcto' : '✖ Orden incorrecto';
+  fb.style.color = ok ? '#1b5e20' : '#8b0000';
+  if(ok) animatePulse(fb);
+});
+
+// --- Mini2: check fill ---
+document.getElementById('checkMini2').addEventListener('click', ()=>{
+  const slot = document.getElementById('dropMini2');
+  const child = slot.firstElementChild;
+  const fb = document.getElementById('mini2feedback');
+  if(child && child.dataset && child.dataset.word === 'aditivo'){
+    fb.textContent = '✔ Correcto'; fb.style.color='#1b5e20'; animatePulse(fb);
+  } else { fb.textContent = '✖ Incorrecto'; fb.style.color='#8b0000'; }
+});
+
+// --- Scoring when finish ---
+document.getElementById('finishBtn').addEventListener('click', ()=>{
+  // auto-gradable questions: p1-p10, p11-p15 (total 15), plus minis 14 and 15
+  const answers = {
+    p1: 'B', p2: 'B', p3: 'B', p4: 'B', p5: 'B', p6: 'B', p7: 'A', p8: 'B', p9: 'B', p10: 'B',
+    p11: 'B', p12: 'B', p13: 'A', p14: 'A', p15: 'B'
+  };
+  let totalAuto = Object.keys(answers).length + 2; // +2 minigames
+  let correct = 0;
+
+  // evaluate radios
+  for(const q in answers){
+    const sel = document.querySelector(`[name="${q}"]:checked`);
+    if(sel){
+      const label = sel.parentElement.textContent.trim();
+      // label starts with letter then ) or letter)
+      const letter = label.charAt(0);
+      if(letter === answers[q]) correct++;
+    }
+  }
+
+  // minijuego1
+  const mini1Correct = (Array.from(document.querySelectorAll('#droprow1 .dropzone')).map(z=> z.firstElementChild ? z.firstElementChild.dataset.id : null).every((v,i)=> v===['recepcion','almacen','transporte','entrega'][i]));
+  if(mini1Correct) correct++;
+
+  // minijuego2
+  const mini2slot = document.getElementById('dropMini2');
+  const mini2OK = mini2slot.firstElementChild && mini2slot.firstElementChild.dataset && mini2slot.firstElementChild.dataset.word === 'aditivo';
+  if(mini2OK) correct++;
+
+  // Show results
+  const scoreText = document.getElementById('scoreText');
+  scoreText.textContent = `Has respondido correctamente ${correct} de ${totalAuto} preguntas automáticas.`;
+
+  const noteText = document.getElementById('noteText');
+  noteText.innerHTML = 'Las preguntas abiertas (11-13) requieren revisión manual.';
+
+  // show modal
+  const modal = document.getElementById('resultModal'); modal.classList.add('show');
+  // confetti if >70%
+  if(correct/totalAuto >= 0.7) launchConfetti();
+});
+
+// close modal
+document.getElementById('closeResult').addEventListener('click', ()=>{ document.getElementById('resultModal').classList.remove('show'); stopConfetti(); });
+
+// reset
+document.getElementById('resetBtn').addEventListener('click', ()=>{ location.reload(); });
+
+// -- simple animations helpers --
+function animatePulse(el){ el.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}], {duration:420}); }
+
+// --- confetti implementation ---
+const canvas = document.getElementById('confettiCanvas');
+const ctx = canvas.getContext('2d');
+let confettiActive = false; let confettiPieces = [];
+function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.addEventListener('resize', resizeCanvas); resizeCanvas();
+
+function launchConfetti(){ confettiActive = true; confettiPieces = [];
+  const colors = ['#b77c2a','#d4c29a','#6b553a','#c94a3e','#6fa3b8'];
+  for(let i=0;i<120;i++){ confettiPieces.push({ x: Math.random()*canvas.width, y: Math.random()*-canvas.height, vx:(Math.random()-0.5)*3, vy: Math.random()*3+2, rot:Math.random()*360, size: Math.random()*8+6, color: colors[Math.floor(Math.random()*colors.length)] }); }
+  requestAnimationFrame(confettiLoop);
+}
+function confettiLoop(){ if(!confettiActive) return; ctx.clearRect(0,0,canvas.width,canvas.height); for(const p of confettiPieces){ p.x += p.vx; p.y += p.vy; p.rot += p.vx*2; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle = p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6); ctx.restore(); if(p.y>canvas.height+50){ p.y = Math.random()*-canvas.height; p.x = Math.random()*canvas.width; } } requestAnimationFrame(confettiLoop); }
+function stopConfetti(){ confettiActive=false; ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+// touch support for dragging into dropzones (simple)
+let touchDragged = null;
+Array.from(document.querySelectorAll('.draggable')).forEach(el=>{
+  el.addEventListener('touchstart', e=>{ touchDragged = el; });
+});
+Array.from(document.querySelectorAll('.dropzone')).forEach(z=>{
+  z.addEventListener('touchend', e=>{ if(touchDragged) z.appendChild(touchDragged); touchDragged=null; });
+});
+
+</script>
+</body>
+</html>

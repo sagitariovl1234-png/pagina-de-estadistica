@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+<title>Diagrama de Árbol Aquarius</title>
+<style>
+  :root{
+    --bg: linear-gradient(180deg,#eaf3ff 0%, #f7fbff 60%);
+    --glass: rgba(255,255,255,0.6);
+    --accent: #4a90e2;
+    --accent-2: #7bd389;
+    --muted: #233044;
+    --radius: 14px;
+  }
+  html,body{height:100%;margin:0;font-family:Frutiger, 'Segoe UI', Roboto, Arial, sans-serif;background:var(--bg);color:var(--muted)}
+  .wrap{max-width:1100px;margin:28px auto;padding:28px}
+  header{display:flex;align-items:center;gap:18px}
+  .logo{width:68px;height:68px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#8fb7ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 10px 30px rgba(74,144,226,0.12);font-size:20px}
+  h1{margin:0;font-size:24px}
+  p.lead{margin:4px 0 0;color:#46627a}
+
+  .glass-panel{background:var(--glass);backdrop-filter:blur(14px) saturate(150%);border-radius:var(--radius);padding:22px;margin-top:18px;border:1px solid rgba(255,255,255,0.7);box-shadow:0 10px 40px rgba(50,70,100,0.06)}
+
+  .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+  .muted{color:#546b7b}
+  h2{margin-top:0;color:var(--muted)}
+
+  
+  .tree-wrap{background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.55));border-radius:12px;padding:18px;}
+  svg{width:100%;height:520px}
+
+  
+  .node{cursor:pointer;transition:transform .18s ease,filter .18s}
+  .node:hover{transform:translateY(-4px);filter:drop-shadow(0 8px 20px rgba(74,144,226,0.12))}
+  .node circle{fill:linear-gradient(#fff,#f1f8ff);stroke:#dbeafc;stroke-width:2}
+  .label{font-size:13px;fill:var(--muted);font-weight:600}
+  .edge{stroke:#9bbcf7;stroke-width:2;opacity:0.9}
+  .prob{font-size:12px;fill:#2b4a67}
+
+  
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .btn{background:white;border:1px solid rgba(34,56,80,0.06);padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+  .btn.accent{background:linear-gradient(90deg,var(--accent),#8fb7ff);color:white;border:none}
+
+  aside{position:relative}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.6));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.8);}
+  .calc{font-family:monospace;background:rgba(250,250,255,0.6);padding:10px;border-radius:8px;margin-top:10px}
+
+  footer{margin-top:18px;font-size:13px;color:var(--muted)}
+
+ 
+  @media (max-width:1000px){.grid{grid-template-columns:1fr}.tree-wrap svg{height:420px}}
+
+  
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header style="position:sticky;top:0;backdrop-filter:blur(18px) saturate(180%);background:rgba(255,255,255,0.55);padding:14px 20px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,0.7);box-shadow:0 10px 40px rgba(60,80,100,0.08)">
+  <div style="display:flex;align-items:center;gap:14px">
+    <div class="logo"><img src="imagens/logo proyecto Aquarius.png" width="70"></div>
+    <div>
+      <h1 style="margin:0;font-size:22px;color:#233044">Diagrama de Árbol</h1>
+      <p class="lead" style="font-size:13px;color:#4c5f73;margin:2px 0"> probabilidad y estadistica</p>
+    </div>
+  </div>
+  <nav style="display:flex;gap:14px;">
+    <a href="menu.html" style="padding:8px 14px;border-radius:8px;background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);font-weight:600;color:#233044;text-decoration:none;transition:.25s">Menú principal</a>
+    <a href="venn.html" style="padding:8px 14px;border-radius:8px;background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);font-weight:600;color:#233044;text-decoration:none;transition:.25s">Diagrama de Venn</a>
+    <a href="conjuntos.html" style="padding:8px 14px;border-radius:8px;background:rgba(255,255,255,0.65);backdrop-filter:blur(12px);font-weight:600;color:#233044;text-decoration:none;transition:.25s">Leyes y Propiedades</a>
+  </nav>
+</header>
+
+    <div class="grid">
+      <main>
+        <section class="glass-panel">
+          <h2>Introducción y contexto</h2>
+<p class="muted">Los diagramas de arbol nos dan una representacion grafica que nos ayuda a que el razonamiento combinatorio y probabilistico. Usarlo nos da la ayuda a organizar informacion paso a paso, podemos vizualizar escenarios posibles y calcular las probabilidades de forma clara y estructurada. son muy utiles en la educacion ya que comrprenden los procesos aleatorios, deciciones sucesivas y conteo de resultados sin perderse entre los valores y numeros.
+<br><br>
+En estos diagramas nos ayudan a identificar posibles caminos, resultados y probilidades asociadas, esto se convierte en en una herramienta valioza para problemas al azar, combinatoria, analisis de datos y situaciones donde intervienen múltiples etapas o condiciones. Con ellos se pueden resolver desde ejercicios básicos hasta situaciones complejas presentes en distintos contextos matemáticos.
+</p>
+<h2>Diagrama interactivo (ejemplo: selección de frutas en dos pasos)</h2>
+          <div class="tree-wrap">
+            
+            <svg id="tree" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" aria-label="Diagrama de árbol interactivo">
+              
+              <line class="edge" x1="200" y1="80" x2="450" y2="200" id="e1"></line>
+              <line class="edge" x1="200" y1="80" x2="450" y2="320" id="e2"></line>
+
+              <g class="node" transform="translate(200,80)" data-id="root">
+                <circle r="30" cx="0" cy="0" fill="#ffffff" stroke="#cfe6ff" stroke-width="2"></circle>
+                <text class="label" x="0" y="5" text-anchor="middle">Inicio</text>
+              </g>
+
+              <g class="node" transform="translate(450,200)" data-id="A">
+                <circle r="26" cx="0" cy="0" fill="#f7fbff" stroke="#b6d8ff" stroke-width="2"></circle>
+                <text class="label" x="0" y="5" text-anchor="middle">Manzana</text>
+                <text class="prob" x="0" y="28" text-anchor="middle">P=0.6</text>
+              </g>
+
+              <g class="node" transform="translate(450,320)" data-id="B">
+                <circle r="26" cx="0" cy="0" fill="#fffaf0" stroke="#f6e0b6" stroke-width="2"></circle>
+                <text class="label" x="0" y="5" text-anchor="middle">Pera</text>
+                <text class="prob" x="0" y="28" text-anchor="middle">P=0.4</text>
+              </g>
+
+              <!-- Level 2 branches from Manzana -->
+              <line class="edge" x1="450" y1="200" x2="760" y2="140" id="e3"></line>
+              <line class="edge" x1="450" y1="200" x2="760" y2="260" id="e4"></line>
+
+              <g class="node" transform="translate(760,140)" data-id="A1">
+                <circle r="22" cx="0" cy="0" fill="#fff" stroke="#d0f0e6" stroke-width="2"></circle>
+                <text class="label" x="0" y="5" text-anchor="middle">Rojo</text>
+                <text class="prob" x="0" y="28" text-anchor="middle">P=0.5</text>
+              </g>
+
+              <g class="node" transform="translate(760,260)" data-id="A2">
+                <circle r="22" cx="0" cy="0" fill="#fff" stroke="#ffdede" stroke-width="2"></circle>
+                <text class="label" x="0" y="5" text-anchor="middle">Verde</text>
+                <text class="prob" x="0" y="28" text-anchor="middle">P=0.5</text>
+              </g>
+
+              <!-- Level 2 branches from Pera -->
+              <line class="edge" x1="450" y1="320" x2="760" y2="360" id="e5"></line>
+              <line class="edge" x1="450" y1="320" x2="760" y2="440" id="e6"></line>
+
+              <g class="node" transform="translate(760,360)" data-id="B1">
+                <circle r="22" cx="0" cy="0" fill="#fff" stroke="#d0f0e6" stroke-width="2"></circle>
+                <text class="label" x="0" y="5" text-anchor="middle">Amarillo</text>
+                <text class="prob" x="0" y="28" text-anchor="middle">P=0.7</text>
+              </g>
+
+              <g class="node" transform="translate(760,440)" data-id="B2">
+                <circle r="22" cx="0" cy="0" fill="#fff" stroke="#ffdede" stroke-width="2"></circle>
+                <text class="label" x="0" y="5" text-anchor="middle">Morado</text>
+                <text class="prob" x="0" y="28" text-anchor="middle">P=0.3</text>
+              </g>
+
+              <!-- leaf results (joint probs) -->
+              <g id="results" />
+            </svg>
+
+          </div>
+
+          <div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div class="controls">
+              <button class="btn" id="reset">Restablecer</button>
+              <button class="btn accent" id="calc">Calcular probabilidades</button>
+              <button class="btn" id="toggleAnim">Alternar animaciones</button>
+            </div>
+            <div style="text-align:right;color:#3b556b;font-size:13px;max-width:420px;">Tip: haz click en cualquier nodo para ver su ruta y probabilidad conjunta.</div>
+          </div>
+
+          
+
+          
+<h2>Ejemplo resuelto</h2>
+<p class="muted">Una urna contiene 5 bolas rojas y 3 verdes. Se extrae una bola y se reemplaza por 2 bolas del otro color. Luego se extrae una segunda bola.</p>
+<ul class="muted">
+<li>a) Probabilidad de que la segunda bola sea verde:</li>
+<li>• Si la primera es roja (5/8), se agregan 2 verdes → totales 5 rojas y 5 verdes → P(verdes)= 5/10</li>
+<li>• Si la primera es verde (3/8), se agregan 2 rojas → totales 7 rojas y 3 verdes → P(verdes)= 3/10</li>
+<li>P(segunda verde)= (5/8)(1/2) + (3/8)(3/10)= 25/80 + 9/80= 34/80= 0.425</li>
+<li>b) Probabilidad de que la primera haya sido roja si la segunda también fue roja:</li>
+<li>P(R1 ∩ R2)= (5/8)(1-1/2)= 5/16</li>
+<li>P(R2)= (5/8)(1/2) + (3/8)(7/10)= 5/16 + 21/80= 46/80= 0.575</li>
+<li>P(R1 | R2)= (5/16) / (46/80)= (5/16)*(80/46)= 25/23 ≈ 0.543</li>
+</ul></h2>
+          <h2 style="margin-top:18px">Profundización y usos docentes></h2>
+ muestran cómo los diagramas de árbol facilitan la construcción de modelos mentales de conteo y probabilidad condicionada en estudiantes. Además, trabajos de Díaz &amp; de la Fuente exploran dificultades y estrategias al enseñar razonamiento condicional y Bayes (ver referencias).</p>
+
+          <p class="muted">Investigaciones (Batanero, Godino, Navarro-Pelayo)
+          <details style="margin-top:10px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.5);">
+            <summary style="font-weight:700">Lecturas clave (resumen)</summary>
+            <ul>
+              <li>Batanero et al. (1994,1997): enfoque en razonamiento combinatorio e impacto en la enseñanza.</li>
+              <li>Díaz &amp; de la Fuente (2005,2006): estudios sobre comprensión del teorema de Bayes y probabilidad condicional.</li>
+              <li>Kolloffel et al. (2009): formato representacional y simulaciones interactivas para el aprendizaje.</li>
+            </ul>
+            
+          </details>
+          <h2>Video explicativo de Daniel Carreon</h2>
+          <iframe
+          width="560"
+          height="315"
+          src="imagens/Arbolvid.mp4"
+          tittle="Diagrma de arbol"
+          frameborder="0"
+          allow="autoplay; encrypted-media;"
+          allowfullscreen>
+          </iframe>
+
+        </section>
+      </main>
+
+      <aside>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;color:var(--muted)">Cálculo y resultados</h3>
+          <div id="calcBox" class="calc">Resultados aparecerán aquí después de calcular.</div>
+
+          <h4 style="margin-top:12px;color:var(--muted)">Ajusta probabilidades (solo hojas)</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+            <label>Manzana → Roja: <input type="number" step="0.01" min="0" max="1" id="pA1" value="0.5"></label>
+            <label>Manzana → Verde: <input type="number" step="0.01" min="0" max="1" id="pA2" value="0.5"></label>
+            <label>Pera → Amarilla: <input type="number" step="0.01" min="0" max="1" id="pB1" value="0.7"></label>
+            <label>Pera → Morada: <input type="number" step="0.01" min="0" max="1" id="pB2" value="0.3"></label>
+          </div>
+
+          
+
+
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn" id="apply">Aplicar</button>
+            <button class="btn" id="example1">Ejemplo: Moneda y dado</button>
+          </div>
+
+          <div style="margin-top:14px;font-size:13px;color:var(--muted);line-height:1.4;">
+            <strong>Referencias (selección):</strong>
+            <ul style="padding-left:18px;margin:6px 0;color:#35526b;">
+              <li>Batanero, C., Godino, J.D. &amp; Navarro-Pelayo, V. (1994,1997)</li>
+              <li>Díaz, C. &amp; de la Fuente, I. (2005,2006)</li>
+              <li>Kolloffel, B. et al. (2009)</li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="glass-panel">
+      <h3 style="margin:0 0 6px 0">Material adicional y referencias</h3>
+      <p class="muted">A continuación las referencias completas en formato APA7 (selección aportada por el usuario):</p>
+      <div style="font-size:14px;color:#334a63">
+        <p>Batanero, C., Godino, J.D. y Navarro-Pelayo, V. (1994). <em>Razonamiento combinatorio</em>. Madrid: Síntesis.</p>
+        <p>Batanero, C., Navarro-Pelayo, V. y Godino, J.D. (1997). Effect of the implicit combinatorial model on combinatorial reasoning in secondary school pupils. <em>Educational Studies in Mathematics, 32</em>(2), 181-199.</p>
+        <p>Díaz, C., &amp; de la Fuente, I. (2005). Razonamiento sobre probabilidad condicional e implicaciones para la enseñanza de la estadística. <em>Epsilon, 59</em>, 245-260.</p>
+        <p>Díaz, C., &amp; de la Fuente, I. (2006). Dificultades en la resolución de problemas que involucran el teorema de Bayes: Un estudio exploratorio en estudiantes españoles de Psicología. <em>Educación matemática, 18</em>(2), 75-94.</p>
+        <p>Engel, A., Varga, T. y Walser, W. (1976). <em>Hasard ou strategie: jeux de combinatoire, de probabilités et de statistiques</em>. OCDL-Office Central de Librairie.</p>
+        <p>Kolloffel, B., Eysink, T. H., de Jong, T. y Wilhelm, P. (2009). The effects of representational format on learning combinatorics from an interactive computer simulation. <em>Instructional Science, 37</em>(6), 503-517.</p>
+        <p>Más referencias: Junta de Andalucía (2017); López-Martín et al. (2016); Ministerio de Educación (2015); Roa (2000); Universidad Complutense de Madrid (2017).</p>
+      </div>
+    </footer>
+  </div>
+
+<script>
+(function(){
+  const svg = document.getElementById('tree');
+  const get = id => svg.querySelector('[data-id="'+id+'"]');
+  const results = document.getElementById('results');
+  const calcBox = document.getElementById('calcBox');
+  let anim=true;
+
+  function joint(p1,p2){return Math.round((p1*p2)*1000)/1000}
+
+  function renderResults(pA=0.6,pB=0.4,pA1=0.5,pA2=0.5,pB1=0.7,pB2=0.3){
+    results.innerHTML='';
+    const combos=[
+      {id:'A1',label:'Manzana→Rojo',p:joint(pA,pA1),x:820,y:130},
+      {id:'A2',label:'Manzana→Verde',p:joint(pA,pA2),x:820,y:260},
+      {id:'B1',label:'Pera→Amarillo',p:joint(pB,pB1),x:820,y:360},
+      {id:'B2',label:'Pera→Morado',p:joint(pB,pB2),x:820,y:440}
+    ];
+    combos.forEach(c=>{
+      const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      rect.setAttribute('x',c.x-80);rect.setAttribute('y',c.y-14);rect.setAttribute('width',160);rect.setAttribute('height',28);
+      rect.setAttribute('rx',8);rect.setAttribute('fill','rgba(255,255,255,0.9)');rect.setAttribute('stroke','rgba(60,100,140,0.08)');
+      const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+      text.setAttribute('x',c.x);text.setAttribute('y',c.y+5);text.setAttribute('text-anchor','middle');text.setAttribute('font-size','13');text.setAttribute('fill','#123');
+      text.textContent=`${c.label}: P = ${c.p}`;
+      g.appendChild(rect);g.appendChild(text);results.appendChild(g);
+    });
+    calcBox.textContent = combos.map(c=>`${c.label}: P = ${c.p}`).join('\n');
+  }
+
+  
+  renderResults();
+
+  
+  svg.querySelectorAll('.node').forEach(n=>{
+    n.addEventListener('click',e=>{
+      const id=n.getAttribute('data-id');
+      if(id==='root'){alert('Nodo inicial: selecciona una rama para explorar');return}
+      
+      svg.querySelectorAll('.edge').forEach(el=>el.style.strokeWidth='2');
+      if(id==='A' || id==='A1' || id==='A2') document.getElementById('e1').style.strokeWidth='4';
+      if(id==='B' || id==='B1' || id==='B2') document.getElementById('e2').style.strokeWidth='4';
+      if(id==='A1' || id==='A2') document.getElementById('e3').style.strokeWidth='4';
+      if(id==='B1' || id==='B2') document.getElementById('e5').style.strokeWidth='4';
+      
+      const pA=0.6,pB=0.4,pA1=parseFloat(document.getElementById('pA1').value),pA2=parseFloat(document.getElementById('pA2').value),pB1=parseFloat(document.getElementById('pB1').value),pB2=parseFloat(document.getElementById('pB2').value);
+      let message='';
+      if(id==='A'){message=`P(Manzana)= ${pA}`}
+      if(id==='B'){message=`P(Pera)= ${pB}`}
+      if(id==='A1'){message=`P(Manzana ∩ Rojo)= ${joint(pA,pA1)}`}
+      if(id==='A2'){message=`P(Manzana ∩ Verde)= ${joint(pA,pA2)}`}
+      if(id==='B1'){message=`P(Pera ∩ Amarillo)= ${joint(pB,pB1)}`}
+      if(id==='B2'){message=`P(Pera ∩ Morado)= ${joint(pB,pB2)}`}
+      calcBox.textContent=message;
+    })
+  })
+
+  document.getElementById('calc').addEventListener('click',()=>{
+    const pA1=parseFloat(document.getElementById('pA1').value),pA2=parseFloat(document.getElementById('pA2').value),pB1=parseFloat(document.getElementById('pB1').value),pB2=parseFloat(document.getElementById('pB2').value);
+    renderResults(0.6,0.4,pA1,pA2,pB1,pB2);
+  });
+
+  document.getElementById('apply').addEventListener('click',()=>{document.getElementById('calc').click();});
+  document.getElementById('reset').addEventListener('click',()=>{document.getElementById('pA1').value=0.5;document.getElementById('pA2').value=0.5;document.getElementById('pB1').value=0.7;document.getElementById('pB2').value=0.3;document.getElementById('calc').click();});
+  document.getElementById('example1').addEventListener('click',()=>{
+
+    alert('Ejemplo: Moneda (Cara/Cruz 0.5) y dado (Par 0.5 / Impar 0.5)');
+  });
+
+})();
+</script>
+</body>
+</html>

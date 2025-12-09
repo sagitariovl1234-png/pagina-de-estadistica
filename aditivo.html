@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+  <title>Principio Aditivo Aquarius</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+      background: #f4f5f9;
+      color: #232323;
+    }
+
+    header {
+      background: linear-gradient(135deg, #6a4cab, #4d2b8f);
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    h2 {
+      color: #4d2b8f;
+      font-size: 24px;
+      margin-top: 24px;
+      border-bottom: 2px solid #9c6ad1;
+      padding-bottom: 6px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .box {
+      background: #ffffff;
+      border: 2px outset #9c6ad1;
+      border-radius: 8px;
+      padding: 18px;
+      margin: 20px 0;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.1), 0 4px 16px rgba(0,0,0,0.2);
+    }
+    
+
+    .formula {
+      font-family: 'Courier New', monospace;
+      background: #e8e8ff;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid #6a4cab;
+      display: inline-block;
+      margin: 8px 0;
+    }
+
+    .highlight {
+      color: #00e0ff;
+      text-shadow: 0 0 6px #00e0ff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+
+    table td, table th {
+      border: 1px solid #9c6ad1;
+      padding: 8px 10px;
+      background: #fafaff;
+    }
+
+    table th {
+      background: #dcd8ff;
+      color: #4d2b8f;
+    }
+
+    
+    .game-grid { display:flex; flex-direction:column; gap:12px; align-items:center; }
+    #game1-options button { background:#6a4cab; color:white; border:none; padding:10px 14px; margin:6px; border-radius:8px; cursor:pointer; transition:0.2s; }
+    #game1-options button:hover { transform:translateY(-3px); }
+    #timerBar { width:100%; height:14px; background:#eee; border-radius:999px; overflow:hidden; }
+    #timerFill { height:100%; width:100%; background:linear-gradient(90deg,#00e0ff,#6a4cab); transition:width 0.2s linear; }
+
+    .draggable-word { padding:8px 12px; background:#d5c8ff; border:1px solid #6a4cab; border-radius:6px; display:inline-block; margin:6px; cursor:grab; }
+    .drop-zone { display:inline-block; min-width:120px; min-height:26px; border-bottom:2px dashed #4d2b8f; margin:0 6px; vertical-align:middle; }
+    .drop-zone.correct { border-bottom:2px solid #00c853; }
+
+    footer { background: #4d2b8f; color: white; padding: 16px 0; text-align: center; margin-top: 40px; }
+    footer a { color: #00e0ff; text-decoration: none; }
+
+    @media (max-width:640px){ .container{padding:18px} .drop-zone{min-width:90px} }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Principio Aditivo</h1>
+</header>
+
+<div class="container">
+
+  <h2>¿Qué es el Principio Aditivo?</h2>
+  <p>
+    El principio aditivo es una herramienta fundamental dentro del análisis combinatorio. Explica que cuando un proceso presenta múltiples alternativas que <strong>no pueden ocurrir simultáneamente</strong> —es decir, son alternativas mutuamente excluyentes—, el número total de resultados posibles se obtiene mediante la <span class="highlight">suma</span> de las posibilidades de cada alternativa. Este principio resulta especialmente útil cuando un individuo o un sistema debe escoger una sola opción entre varios escenarios independientes. Por ejemplo, si una persona decide entre varios métodos, rutas o categorías donde solo una puede ser seleccionada en cada decisión, la suma de las opciones individuales representa el total de decisiones posibles.
+  </p>
+
+  <div class="box">
+    <p><strong>Fórmula básica:</strong></p>
+    <div class="formula">N = n₁ + n₂ + … + nₖ</div>
+    <p>donde <em>n₁, n₂, …, nₖ</em> representan las opciones disponibles en cada alternativa disjunta.</p>
+  </div>
+
+  <h2>Ejemplos prácticos</h2>
+
+  <div class="box">
+    <p><strong>Ejemplo 1 — Elección simple:</strong></p>
+    <p>Si una tienda ofrece 5 tipos de postres y 3 tipos de bebidas, y debes elegir <strong>un postre o una bebida</strong>, entonces las combinaciones posibles son:</p>
+    <div class="formula">5 + 3 = 8</div>
+    <p>Así hay 8 opciones distintas.</p>
+  </div>
+
+  <div class="box">
+    <p><strong>Ejemplo 2 — Prendas de vestir:</strong></p>
+    <p>Supón que tienes 6 camisetas distintas y 4 pantalones distintos. Si vas a elegir <strong>una prenda (camiseta o pantalón)</strong> para usar hoy, entonces:</p>
+    <div class="formula">6 + 4 = 10</div>
+      <p>Hay 10 posibilidades distintas.</p>
+  </div>
+
+  <h2>Aplicaciones en procesos y decisiones</h2>
+  <p>
+    Este principio es muy útil cuando existen distintas rutas, opciones o caminos que no se pueden combinar simultáneamente —por ejemplo, seleccionar un plan, escoger un proveedor, elegir un método, entre otros—.
+  </p>
+
+  <div class="box">
+    <p><strong>Ejemplo de selección de método en logística (ampliado):</strong></p>
+    <p>
+      Supongamos una empresa de distribución en México que necesita enviar mercancía desde un centro de distribución en Querétaro hasta una ciudad destino. El responsable logístico debe elegir un único medio de transporte entre tres alternativas excluyentes: <strong>aéreo</strong>, <strong>terrestre</strong> o <strong>marítimo</strong>.
+    </p>
+    <p>
+      ● En el transporte <strong>aéreo</strong> existen 3 aerolíneas disponibles.<br>
+      ● En el transporte <strong>terrestre</strong> operan 4 líneas de autobús y camión de carga.<br>
+      ● En el transporte <strong>marítimo</strong> hay 2 navieras posibles.
+    </p>
+    <p>
+      Como solo se puede elegir <strong>un único medio</strong> —no se pueden combinar—, estas alternativas son mutuamente excluyentes. Por ello, el número total de formas de realizar el envío se obtiene sumando todas las opciones:
+    </p>
+    <div class="formula">3 (aéreo) + 4 (terrestre) + 2 (marítimo) = 9 maneras totales</div>
+    <p>
+      Este análisis permite identificar el abanico real de alternativas y facilita decisiones estratégicas como costos, tiempos de entrega y riesgos asociados. Por ejemplo:
+    </p>
+    <ul>
+      <li><strong>Aéreo:</strong> mayor costo pero tiempos mínimos.</li>
+      <li><strong>Terrestre:</strong> equilibrio entre precio y rapidez, útil para rutas nacionales.</li>
+      <li><strong>Marítimo:</strong> barato pero lento, conveniente para mercancía volumétrica.
+      </li>
+    </ul>
+  </div>
+
+ 
+  <h2>Juegos Interactivos: Practica el Principio Aditivo</h2>
+
+  <div class="box">
+    <h3>Juego 1 — Preguntas rápidas</h3>
+    <div id="game1" class="game-grid box">
+      <div id="game1-question" style="font-weight:700"></div>
+      <div id="game1-options" style="display:flex;flex-wrap:wrap;justify-content:center"></div>
+      <div id="timerBar"><div id="timerFill"></div></div>
+      <div style="display:flex;gap:12px;justify-content:center;align-items:center;margin-top:6px;">
+        <div>Puntuación: <strong id="score">0</strong></div>
+        <button id="startGame1" style="padding:8px 12px;border-radius:8px;background:#6a4cab;color:#fff;border:0;cursor:pointer">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>Juego 2 — Completar frases (Arrastrar y soltar)</h3>
+    <div id="game2" class="box">
+      <div id="sentence-area" style="font-size:1.05rem;margin-bottom:12px"></div>
+      <div id="words-area" style="display:flex;flex-wrap:wrap;gap:8px;min-height:48px"></div>
+      <div id="feedback2" style="margin-top:8px;font-weight:700"></div>
+    </div>
+  </div>
+
+  <h2>Descubre el principio aditivo y ejemplos claros para entenderlo completamente</h2>
+  <div class="box">
+    <p>
+      El principio aditivo es un concepto esencial en matemáticas y estadística que permite determinar la probabilidad de que ocurra al menos uno de dos eventos mutuamente excluyentes. Este principio establece que cuando dos eventos no pueden suceder simultáneamente —es decir, son disjuntos—, la probabilidad de que ocurra uno u otro se obtiene sumando las probabilidades individuales de cada evento.
+    </p>
+    <p>
+      Para entender este principio a fondo, es necesario tener claros algunos elementos fundamentales:
+    </p>
+    <ul>
+      <li><strong>Eventos mutuamente exclusivos:</strong> Se trata de eventos que no pueden ocurrir al mismo tiempo. Por ejemplo, al lanzar un dado, obtener un número par y obtener un número impar son eventos excluyentes.</li>
+      <li><strong>Probabilidad de la unión de eventos:</strong> Cuando A y B son eventos disjuntos, la probabilidad de que ocurra alguno de ellos viene dada por la fórmula:<br>
+        <span class="formula">P(A ∪ B) = P(A) + P(B)</span></li>
+      <li><strong>Aplicaciones:</strong> Este principio es ampliamente utilizado en experimentos aleatorios, como lanzar una moneda o seleccionar categorías únicas en análisis estadísticos.</li>
+    </ul>
+  </div>
+
+  <h2>Descubre todo sobre el método aditivo: definición y aplicaciones</h2>
+  <div class="box">
+    <p>
+      El método aditivo se basa directamente en el principio aditivo y consiste en descomponer cantidades en partes más simples para facilitar procesos de suma. Este método permite analizar números complejos desglosándolos en unidades, decenas o fracciones, haciendo que problemas aritméticos sean más manejables.
+    </p>
+    <p>
+      Su utilidad es amplia y se manifiesta tanto en la educación básica como en cálculos avanzados. Entre sus aplicaciones más comunes destacan:
+    </p>
+    <ul>
+      <li><strong>Enseñanza básica:</strong> Los niños aprenden a descomponer números para hacer sumas más sencillas.</li>
+      <li><strong>Cálculo de descuentos y porcentajes:</strong> Se descompone el costo total en partes para calcular precios finales de manera más rápida.</li>
+      <li><strong>Matemáticas avanzadas:</strong> En problemas complejos, el método aditivo simplifica la suma de expresiones extensas al dividirlas en componentes más pequeños.</li>
+    </ul>
+  </div>
+
+  <h2>Video explicado</h2>
+  <div class="box" style="text-align:center;">
+    <p>Video de apoyo sobre el Principio Aditivo del canal de FiAsMat</p>
+    <div style="position:relative;padding-bottom:45.25%;height:0;overflow:hidden;border-radius:8px;border:2px solid #9c6ad1;box-shadow:0 6px 18px rgba(77,43,143,0.25);margin-top:12px;">
+      <iframe
+      src="imagens/AditivoV.mp4"
+      title="Video Principio Aditivo" 
+      style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" 
+      allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Resumen de Resumen de Análisis Combinatorio: Principio Aditivo. (2025). Teachy. https://teachy.ai/es/resumenes/educacion-media/media-superior-2-grado/matematicas-a-espanol/resumen-de-analisis-combinatorio-principio-aditivo
+</footer>
+
+<script>
+
+const questions = [
+  { q: "Una tienda tiene 5 postres y 3 bebidas. Si eliges solo una opción, ¿cuántas alternativas hay?", options: ["8","15","5"], correct: 0 },
+  { q: "Si existen 3 aerolíneas, 4 terrestres y 2 marítimas, ¿cuántas formas de envío hay?", options: ["9","7","5"], correct: 0 },
+  { q: "El principio aditivo se aplica cuando los eventos son…", options: ["Mutuamente excluyentes","Dependientes","Simultáneos"], correct: 0 },
+  { q: "P(A ∪ B) = P(A) + P(B) se usa cuando A y B son…", options: ["Eventos disjuntos","Eventos repetidos","Eventos simultáneos"], correct: 0 },
+  { q: "Si una persona puede elegir entre 4 camisetas o 6 sudaderas, ¿cuántas opciones tiene?", options: ["10","24","2"], correct: 0 },
+  { q: "En un menú hay 7 entradas y 5 sopas, ¿cuántas elecciones posibles de un solo platillo hay?", options: ["12","35","2"], correct: 0 },
+  { q: "Si un museo tiene 3 salas permanentes y 4 temporales, ¿cuántas salas distintas puedes visitar?", options: ["7","12","1"], correct: 0 },
+  { q: "El principio aditivo combina la cantidad total cuando los eventos…", options: ["No pueden ocurrir al mismo tiempo","Siempre ocurren juntos","Son dependientes uno del otro"], correct: 0 },
+  { q: "Un estudiante puede escoger 2 materias optativas de arte o 3 de deportes. ¿Cuántas alternativas tiene si solo elige una?", options: ["5","6","2"], correct: 0 },
+  { q: "Si un videojuego tiene 8 armas cuerpo a cuerpo y 5 armas a distancia, ¿cuántas opciones totales hay para elegir solo una?", options: ["13","40","3"], correct: 0 }
+];
+
+let currentQ = 0;
+let score = 0;
+let timer1 = null;
+const roundTime = 8000; 
+
+const qEl = document.getElementById('game1-question');
+const optsEl = document.getElementById('game1-options');
+const fillEl = document.getElementById('timerFill');
+const scoreEl = document.getElementById('score');
+const startBtn1 = document.getElementById('startGame1');
+
+function renderQuestion(){
+  const q = questions[currentQ];
+  qEl.textContent = q.q;
+  optsEl.innerHTML = '';
+  q.options.forEach((opt,i)=>{
+    const b = document.createElement('button'); b.textContent = opt; b.onclick = ()=>selectAnswer(i);
+    optsEl.appendChild(b);
+  });
+  startTimer1();
+}
+
+function startTimer1(){
+  clearInterval(timer1);
+  const start = Date.now();
+  fillEl.style.width = '100%';
+  timer1 = setInterval(()=>{
+    const pct = 1 - (Date.now()-start)/roundTime;
+    fillEl.style.width = Math.max(0,pct*100) + '%';
+    if(pct<=0){ clearInterval(timer1); nextQuestion1(); }
+  },50);
+}
+
+function selectAnswer(i){
+  clearInterval(timer1);
+  if(i === questions[currentQ].correct) score += 10; else score = Math.max(0, score-5);
+  scoreEl.textContent = score;
+  nextQuestion1();
+}
+
+function nextQuestion1(){ currentQ = (currentQ+1) % questions.length; renderQuestion(); }
+
+startBtn1.addEventListener('click', ()=>{ score = 0; scoreEl.textContent = score; currentQ = 0; renderQuestion(); });
+
+
+renderQuestion();
+
+
+const phrases = [
+  { text: ["El principio aditivo consiste en ", "sumar", " las opciones de eventos que son ", "mutuamente excluyentes", "."], missing: ["sumar","mutuamente excluyentes"] },
+  { text: ["La fórmula básica es ", "N = n₁ + n₂ + ... + nₖ", " y se usa cuando solo ", "una alternativa", " puede ocurrir."], missing: ["N = n₁ + n₂ + ... + nₖ","una alternativa"] }
+];
+let currentPhrase = 0;
+
+function renderPhrase(){
+  const ph = phrases[currentPhrase];
+  const area = document.getElementById('sentence-area'); area.innerHTML = '';
+  ph.text.forEach(part => {
+    if(ph.missing.includes(part)){
+      const span = document.createElement('span'); span.className = 'drop-zone'; span.dataset.word = part; area.appendChild(span);
+    } else {
+      area.innerHTML += part;
+    }
+  });
+
+  const bank = document.getElementById('words-area'); bank.innerHTML = '';
+  shuffle([...ph.missing]).forEach(w=>{
+    const s = document.createElement('span'); s.className='draggable-word'; s.textContent = w; s.draggable=true;
+    s.addEventListener('dragstart', e=>{ e.dataTransfer.setData('text', w); }); bank.appendChild(s);
+  });
+
+  document.querySelectorAll('.drop-zone').forEach(z=>{
+    z.addEventListener('dragover', e=>e.preventDefault());
+    z.addEventListener('drop', e=>{
+      const word = e.dataTransfer.getData('text'); if(word===z.dataset.word){ z.textContent = word; z.classList.add('correct'); checkPhraseComplete(); }
+    });
+  });
+}
+
+function checkPhraseComplete(){
+  const all = document.querySelectorAll('.drop-zone');
+  for(const z of all) if(!z.classList.contains('correct')) return; 
+  document.getElementById('feedback2').textContent = '¡Correcto!';
+  setTimeout(()=>{ document.getElementById('feedback2').textContent=''; currentPhrase = (currentPhrase+1)%phrases.length; renderPhrase(); }, 1000);
+}
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+renderPhrase();
+</script>
+
+</body>
+</html>

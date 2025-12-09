@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+<title>Espacios Finitos Equiprobables Aquarus</title>
+<style>
+
+body {
+    font-family: "Segoe UI", Verdana, sans-serif;
+    background: linear-gradient(180deg, #f7f4ff 0%, #fff 40%, #f4ecff 100%);
+    color: #3a2b5f;
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    background: linear-gradient(90deg, #d7c4ff, #e8d9ff, #f4eaff);
+    padding: 18px 30px;
+    box-shadow: 0 2px 8px rgba(60, 0, 90, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #c7b0ff;
+}
+
+
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+    color: #4c2c8a;
+    text-shadow: 1px 1px 2px #ffffff;
+}
+
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+
+.nav-buttons a {
+    text-decoration: none;
+    background: linear-gradient(180deg, #fdfcff, #e1d6ff);
+    border: 2px solid #bfa3ff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    color: #4c2c8a;
+    font-weight: bold;
+    transition: 0.25s ease-in-out;
+    box-shadow: 0 2px 5px rgba(70, 0, 110, 0.2);
+}
+
+
+.nav-buttons a:hover {
+    background: #d2b7ff;
+    color: white;
+    border-color: #a47aff;
+    box-shadow: 0 4px 10px rgba(70, 0, 110, 0.3);
+    transform: translateY(-2px);
+}
+
+
+.nav-buttons a:active {
+    transform: translateY(1px);
+}
+
+
+section, article, .card {
+    background: rgba(255, 255, 255, 0.75);
+    padding: 22px;
+    margin: 25px auto;
+    width: 85%;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(70, 0, 110, 0.15);
+    border: 1px solid #e8d9ff;
+}
+
+
+h2, h3 {
+    color: #5d37a5;
+    text-shadow: 0px 1px 2px #fff;
+}
+
+
+button.game-btn {
+    background: linear-gradient(180deg, #fdfcff, #e7d2ff);
+    border: 2px solid #bfa3ff;
+    border-radius: 10px;
+    padding: 10px 18px;
+    color: #4c2c8a;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(80, 0, 120, 0.2);
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button.game-btn:hover {
+    background: #d9bfff;
+    color: white;
+}
+
+input, select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 2px solid #d7c4ff;
+    outline: none;
+    transition: 0.25s;
+}
+
+input:focus {
+    border-color: #a47aff;
+    box-shadow: 0 0 6px rgba(150, 100, 255, 0.4);
+}
+
+
+.video-frame {
+    width: 90%;
+    max-width: 900px;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(80, 0, 120, 0.25);
+    border: 2px solid #d7c4ff;
+    overflow: hidden;
+    margin: auto;
+}
+
+
+    .container {
+        max-width: 980px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        margin-top: 40px;
+        border-radius: 16px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+        color: #b44ee0;
+        text-shadow: 1px 1px #ffe8ff;
+    }
+
+    .highlight-box {
+        background: #ffe1ff;
+        border-left: 5px solid #c76bff;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+
+    .example-box {
+        background: #fff0f5;
+        border: 1px solid #ffc1e3;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+
+    #game-area {
+        margin-top: 30px;
+        padding: 20px;
+        background: #e7d6ff;
+        border-radius: 14px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    #question {
+        font-size: 20px;
+        font-weight: bold;
+        color: #5f2b84;
+        margin-bottom: 15px;
+    }
+
+    input[type="number"] {
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid #caa6ff;
+        width: 100px;
+        font-size: 16px;
+    }
+
+    button {
+        background: #ff8aba;
+        border: none;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        color: white;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ff619f;
+    }
+
+    .result {
+        margin-top: 12px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Espacio Muestral Equiprobable</h1>
+
+    <div class="nav-buttons">
+        <a href="menu.html">Menu</a>
+        <a href="axiomas.html">Probabilidad</a>
+        <a href="clasico.html">conceto clasico</a>
+        <a href="peromutacion.html">permutaciones</a>
+        <a href="miniU3.html">minijuego unidad 3</a>
+    </div>
+</header>
+
+
+<div class="container">
+
+<h1>¿Qué es un Espacio Finito Equiprobable?</h1>
+
+<div class="highlight-box">
+    <p>
+        Un espacio muestral es <strong>finito</strong> y <strong>equiprobable</strong> cuando cumple las siguientes condiciones formales y prácticas:
+        <ol>
+            <li><strong>Cardinalidad finita:</strong> contiene un número finito <strong>n</strong> de resultados posibles (por ejemplo, los 6 resultados de un dado).</li>
+            <li><strong>Equiprobabilidad:</strong> a cada resultado se le asigna la misma probabilidad teórica, es decir, cada resultado tiene probabilidad <strong>1/n</strong>.</li>
+            <li><strong>No negatividad:</strong> todas las probabilidades individuales son mayores o iguales a cero (<code>p_i ≥ 0</code>).</li>
+            <li><strong>Normalización:</strong> la suma de las probabilidades de todos los elementos es igual a 1 (<code>∑ p_i = 1</code>).</li>
+        </ol>
+    </p>
+    <p style="margin-top:8px;">En términos prácticos, un espacio finito equiprobable aparece cuando los resultados son claramente contables y no existe motivo para favorecer uno u otro (dados bien balanceados, sorteos justos, selección aleatoria sin sesgo).</p>
+</div>
+
+<h2>Fórmula General y su explicación detallada</h2>
+<div class="example-box">
+    <p>
+        Cuando trabajamos en un espacio finito equiprobable, la probabilidad clásica de un evento <strong>A</strong> se obtiene contando las maneras favorables y dividiéndolas entre el total de casos posibles:
+    </p>
+
+    <p style="font-size: 20px; font-weight: bold; text-align: center;">P(A) = r / n</p>
+
+    <h3>Significado de los símbolos</h3>
+    <ul>
+        <li><strong>r</strong>: número de elementos del espacio muestral que pertenecen al evento A (casos favorables).</li>
+        <li><strong>n</strong>: número total de elementos del espacio muestral (casos posibles).</li>
+    </ul>
+
+    <h3>Justificación paso a paso</h3>
+    <ol>
+        <li>En un espacio equiprobable cada elemento tiene probabilidad <code>1/n</code>.</li>
+        <li>Si el evento A contiene exactamente <code>r</code> elementos, la probabilidad total de A es la suma de las probabilidades de esos r elementos: <code>P(A) = r·(1/n)</code>.</li>
+        <li>Por álgebra simple se obtiene <code>P(A) = r / n</code>.</li>
+    </ol>
+
+    <h3>Notas importantes</h3>
+    <ul>
+        <li>Este enfoque es teórico: si los resultados no son equiprobables (por ejemplo, un dado marcado) no se debe aplicar sin comprobar la hipótesis de equiprobabilidad.</li>
+        <li>Para problemas más complejos se recurre a conteos combinatorios (permutaciones, combinaciones) para calcular <code>r</code> y <code>n</code>.</li>
+    </ul>
+</div>
+
+<div class="example-box">
+    <h2>imagen representativa</h2>
+    <center>
+        <img src="imagens/espacio finito.jpg" width="400" height="250">
+    </center>
+</div>
+
+<h2>Ejemplos Aplicados</h2>
+
+<div class="example-box">
+    <h3>1. Conteo Básico y Diagramas de Árbol (detallado)</h3>
+    <p>Los diagramas de árbol permiten visualizar todas las secuencias posibles cuando hay decisiones sucesivas. Ejemplo clásico:</p>
+    <ol>
+        <li><strong>Lanzamiento de una moneda 3 veces</strong>.<br>
+            - Espacio muestral: todos los resultados de longitud 3 con {A (águila), S (sello)} → <code>n = 2^3 = 8</code> elementos.<br>
+            - Caso puntual: <em>SSS</em> (todos sellos). Es exactamente 1 elemento entre 8, por tanto <code>P(SSS) = 1/8 = 0.125</code>.<br>
+            - Evento: "aparecen exactamente 2 águilas". Favorables: <code>{AAS, ASA, SAA}</code> → <code>r = 3</code>, por tanto <code>P = 3/8 = 0.375</code>.
+        </li>
+        <li><strong>Lanzamiento de un dado 2 veces</strong>.<br>
+            - Espacio muestral: pares ordenados (i,j) con i,j ∈ {1..6} → <code>n = 6×6 = 36</code>.<br>
+            - Evento A: "la suma sea al menos 7". Contamos los pares que suman ≥7 (21 pares). Resultado: <code>P(A) = 21/36 ≈ 0.58333</code>.
+        </li>
+    </ol>
+    <p class="result">Consejo: construir el diagrama o escribir explícitamente los pares ayuda a evitar errores de conteo.</p>
+</div>
+
+
+<div class="example-box">
+    <h3>2. Probabilidad con Combinaciones (detallado)</h3>
+    <p>Cuando el orden no importa usamos combinaciones para calcular el número de casos posibles y favorables.</p>
+    <ol>
+        <li><strong>Seleccionar 2 números del 1 al 9 (sin reemplazo)</strong>.<br>
+            - Total de formas (espacio muestral): <code>n = C(9,2) = 36</code>.<br>
+            - Evento A: "ambos sean pares". Números pares: {2,4,6,8} → formas favorables: <code>C(4,2) = 6</code>.<br>
+            - Resultado: <code>P(A) = 6/36 = 1/6 ≈ 0.1667</code>.
+        </li>
+        <li><strong>Seleccionar 4 computadoras de 20 (4 defectuosas)</strong>.<br>
+            - Espacio muestral: <code>n = C(20,4) = 4,845</code> maneras.<br>
+            - Evento C: "exactamente 3 defectuosas" → elegir 3 de las 4 defectuosas y 1 de las 16 buenas: <code>r = C(4,3)×C(16,1) = 4×16 = 64</code>.<br>
+            - Resultado: <code>P(C) = 64 / 4845 ≈ 0.013209</code>.
+        </li>
+    </ol>
+    <p class="result">Tip: usar calculadora combinatoria o tablas intermedias ayuda con números grandes.</p>
+</div>
+
+<div class="example-box">
+    <h3>3. Probabilidad con Permutaciones (detallado)</h3>
+    <p>Si el orden importa (por ejemplo, inspecciones en secuencia) usamos permutaciones.</p>
+    <ol>
+        <li><strong>Seleccionar 4 computadoras en orden de 20</strong>.<br>
+            - Espacio muestral: <code>n = P(20,4) = 20! / 16! = 116,280</code>.<br>
+            - Evento F: "1ª y 2ª defectuosas; 3ª y 4ª no defectuosas".<br>
+            - Cálculo: elegir orden en defectuosas: <code>P(4,2)=4×3=12</code>; orden en buenas: <code>P(16,2)=16×15=240</code> → <code>r = 12×240 = 2,880</code>.<br>
+            - Resultado: <code>P(F) = 2880 / 116280 ≈ 0.024767</code>.
+        </li>
+    </ol>
+    <p class="result">Precaución: revisar si el problema pide "con" o "sin" orden para elegir la técnica correcta (permutación vs combinación).</p>
+</div>
+
+<div class="example-box">
+    <h3>4. Probabilidad con Tablas de Contingencia (detallado)</h3>
+    <p>Las tablas resumen frecuencias conjuntas de dos variables y permiten calcular probabilidades marginales y condicionales.</p>
+    <p>Ejemplo: en un estudio se inspeccionaron 1,100 flechas; 200 son tipo B y 909 no presentan defectos.</p>
+    <ul>
+        <li>P(flecha tipo B) = 200 / 1,100 ≈ 0.18182</li>
+        <li>P(no defectos) = 909 / 1,100 ≈ 0.82636</li>
+    </ul>
+    <p class="result">Sugerencia: construir la tabla completa permite calcular probabilidades conjuntas y condicionales (por ejemplo, P(no defectos | tipo B)).</p>
+</div>
+
+<div class="example-box">
+<h2>video explicativo de catedra de matematica</h2>
+<center><iframe 
+width="560"
+height="315" 
+src="" 
+title="tipos de espacio finito" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe></center>
+</div>
+
+
+
+
+<div class="example-box">
+  <h2>Usos y Ejemplos en Logística — Espacios Finitos Equiprobables</h2>
+  <p>En logística, los espacios finitos equiprobables se usan para modelar inspecciones, rutas y muestreos cuando los outcomes son discretos y asumimos igualdad de probabilidad entre opciones. A continuación se muestran ejemplos resueltos paso a paso.</p>
+
+  <h3>Ejemplo 1: Inspección de Contenedores en Puerto</h3>
+  <p><strong>Planteamiento:</strong> Se inspeccionan 5 contenedores idénticos (Ω = {C1,C2,C3,C4,C5}), n = 5. Supongamos que 2 están contaminados (casos favorables).</p>
+  <ol>
+    <li><strong>Identificar n:</strong> total de elementos = 5.</li>
+    <li><strong>Contar casos favorables r:</strong> contenedores contaminados = 2.</li>
+    <li><strong>Aplicar fórmula:</strong> P(A) = r / n = 2 / 5 = 0.4.</li>
+    <li><strong>Interpretación:</strong> 40% de probabilidad de que, seleccionando un contenedor al azar, esté contaminado. Implicación operativa: planificar inspecciones más frecuentes o usar muestreo estratificado si el riesgo debe reducirse.</li>
+  </ol>
+</div>
+
+<div class="example-box">
+  <h3>Ejemplo 2: Selección de Rutas de Camiones</h3>
+  <p><strong>Planteamiento:</strong> Tres rutas equiprobables R1,R2,R3 (n=3). R1 y R2 presentan retrasos; R3 no.</p>
+  <ol>
+    <li><strong>Identificar n:</strong> n = 3 rutas.</li>
+    <li><strong>Determinar evento B:</strong> retraso en la ruta escogida (R1 o R2).</li>
+    <li><strong>Contar r:</strong> rutas que retrasan = 2 (R1,R2).</li>
+    <li><strong>Aplicar fórmula:</strong> P(B) = r / n = 2 / 3 ≈ 0.6667.</li>
+    <li><strong>Conclusión operativa:</strong> existe ~66.7% de probabilidad de elegir una ruta con retraso si no se controla la selección; esto sugiere priorizar R3 o introducir políticas de selección con base en desempeño.</li>
+  </ol>
+</div>
+
+<div class="example-box">
+  <h3>Ejemplo 3: Extracción de Fichas en Almacén</h3>
+  <p><strong>Planteamiento:</strong> Almacén con 15 lotes: 6 defectuosos y 9 buenos. Se extrae un lote al azar (simplificación: extracción simple, n=15).</p>
+  <ol>
+    <li><strong>Identificar n:</strong> total de lotes = 15.</li>
+    <li><strong>Contar r:</strong> lotes defectuosos = 6.</li>
+    <li><strong>Aplicar fórmula:</strong> P(D) = r / n = 6 / 15 = 0.4.</li>
+    <li><strong>Uso práctico:</strong> si P(D)=0.4 es alto, se recomienda aumentar controles de calidad, inspecciones por lote o tomar acciones correctivas en proveedores.</li>
+  </ol>
+</div>
+
+
+
+<hr>
+
+
+<h1>🎮 Mini-Juego Interactivo de Probabilidad</h1>
+<div id="game-area">
+    <div id="question">Cargando pregunta...</div>
+
+    <input type="number" id="answer" placeholder="Tu respuesta">
+    <button onclick="checkAnswer()">Responder</button>
+    <button onclick="newQuestion()">Nueva Pregunta</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+</div>
+
+<script>
+const questions = [
+
+   { q: "Un operador selecciona aleatoriamente 1 de 10 pallets, 3 están dañados. ¿Probabilidad de elegir uno dañado?", a: "3/10" },
+    { q: "Un dron de reparto puede tomar 4 rutas equiprobables. Solo 1 evita tráfico. ¿Probabilidad de elegir la ruta sin tráfico?", a: "1/4" },
+    { q: "Una empresa tiene 8 unidades de transporte y 2 entran en mantenimiento. ¿Probabilidad de escoger una en mantenimiento?", a: "2/8" },
+    { q: "Un muestreo aleatorio toma 1 caja entre 12. Si 4 tienen error de etiquetado, ¿probabilidad de tomar una con error?", a: "4/12" },
+    { q: "Un robot elige uno de 6 pasillos para recoger producto. 3 están bloqueados. ¿Probabilidad de elegir uno bloqueado?", a: "3/6" },
+    { q: "Si una flota tiene 20 camiones y 5 tienen fallas leves, ¿probabilidad de seleccionar uno con falla?", a: "5/20" },
+    { q: "Una banda transportadora distribuye paquetes en 4 salidas equiprobables. 1 está saturada. ¿Probabilidad de saturación?", a: "1/4" },
+    { q: "Un lote contiene 50 piezas y 10 están fuera de norma. ¿Probabilidad de tomar una defectuosa?", a: "10/50" },
+  
+    {
+        q: "Lanzas una moneda 3 veces. ¿Cuál es P(SSS)?",
+        a: 1/8
+    },
+    {
+        q: "Lanzas un dado dos veces. ¿Cuál es la probabilidad de obtener suma ≥ 7?",
+        a: 21/36
+    },
+    {
+        q: "Seleccionas 2 números del 1 al 9 sin reemplazo. ¿Cuál es P(ambos pares)?",
+        a: 6/36
+    },
+    {
+        q: "De 1100 flechas, 200 son tipo B. ¿Cuál es P(tipo B)?",
+        a: 200/1100
+    },
+    {
+        q: "Lanzas una moneda 3 veces. ¿Cuál es P(de obtener exactamente 2 águilas)?",
+        a: 3/8
+    },
+    {
+        q: "Sacas 1 computadora defectuosa entre 20 disponibles, con 4 defectuosas. ¿Cuál es P(defectuosa)?",
+        a: 4/20
+    },
+    {
+        q: "De 4 defectuosas y 16 buenas, ¿cuál es P(de elegir 1 defectuosa y luego 1 buena sin reemplazo)?",
+        a: (4/20)*(16/19)
+    },
+    {
+        q: "Lanzas dos dados. ¿Cuál es la probabilidad de obtener un número par en ambos?",
+        a: 9/36
+    },
+    {
+        q: "Tomas una pieza al azar de un lote con 30 buenas y 10 malas. ¿Cuál es P(mala)?",
+        a: 10/40
+    },
+    {
+        q: "En una caja hay 3 rojas, 5 azules y 2 verdes. ¿Cuál es P(roja)?",
+        a: 3/10
+    },
+    {
+        q: "En una fábrica, 15 de 200 productos fallan. ¿Cuál es la probabilidad de falla?",
+        a: 15/200
+    },
+    {
+        q: "Sacas 2 cartas sin reemplazo de una baraja (52). ¿Cuál es P(ambas negras)?",
+        a: (26/52)*(25/51)
+    },
+    {
+        q: "Sacas 1 carta. ¿Cuál es P(figura)? (J,Q,K)",
+        a: 12/52
+    }
+];
+
+let currentQuestion;
+
+function newQuestion(){
+    currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+    document.getElementById("question").innerText = currentQuestion.q;
+    document.getElementById("result").innerText = "";
+    document.getElementById("answer").value = "";
+}
+
+function checkAnswer(){
+    const user = Number(document.getElementById("answer").value);
+    const correct = currentQuestion.a;
+
+    if(Math.abs(user - correct) < 0.0001){
+        document.getElementById("result").innerText = "✔ ¡Correcto!";
+        document.getElementById("result").style.color = "green";
+    } else {
+        document.getElementById("result").innerText = "❌ Incorrecto. La respuesta era: " + correct.toFixed(5);
+        document.getElementById("result").style.color = "red";
+    }
+}
+
+newQuestion();
+</script>
+
+<footer>Diaz, M. R. (2024, March 10). Espacios Muestrales Equiprobables: Definición y Ejemplos. Studocu. https://www.studocu.com/es-mx/document/instituto-tecnologico-superior-de-la-region-sierra/tecnologa-de-la-informacion/equiprobable-perspectivas-de-los-materiales/86710051
+
+‌</footer>
+  
+</body>
+</html>

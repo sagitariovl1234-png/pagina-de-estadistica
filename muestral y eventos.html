@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image" href="imagens/logo proyecto Aquarius.png">
+<title>Espacio Muestral y Eventos — Corporativo</title>
+<style>
+:root{
+  --aero-blue:#c0b8ff;
+  --aero-cyan:#8df7ff;
+  --aero-green:#b6ffcf;
+  --aero-yellow:#fff4b7;
+  --text-main:#0e2330;
+  --text-muted:#3b4e57;
+
+  --glass-white:rgba(255,255,255,0.6);
+  --glass-light:rgba(255,255,255,0.8);
+
+  --bg1:#dff6ff;
+  --bg2:#c6efff;
+  --bg-soft:#edfbff;
+}
+
+
+body{
+  margin:0;
+  font-family:Inter, Segoe UI, system-ui, -apple-system;
+  color:var(--text-main);
+  background:
+    linear-gradient(135deg, var(--bg1), var(--bg2)),
+    #dff6ff;
+  background-attachment:fixed;
+}
+
+
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 36px;
+
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6)),
+    linear-gradient(90deg, var(--aero-blue), var(--aero-green));
+  backdrop-filter:blur(12px);
+
+  border-bottom:1px solid rgba(255,255,255,0.7);
+  box-shadow:
+     0 6px 22px rgba(0,0,0,0.15),
+     inset 0 0 8px rgba(255,255,255,0.4);
+}
+
+header h1{
+  margin:0;
+  font-weight:800;
+  letter-spacing:1px;
+  background:linear-gradient(90deg,var(--aero-blue),var(--aero-green));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+
+nav a{
+  color:#35535f;
+  margin-left:18px;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.2s;
+}
+
+nav a:hover{
+  color:#0a6b80;
+  text-shadow:0 0 10px var(--aero-cyan);
+}
+
+
+.container{
+  max-width:1100px;
+  margin:32px auto;
+  padding:0 20px;
+}
+
+
+.card{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65)),
+    rgba(255,255,255,0.55);
+  border:1px solid rgba(255,255,255,0.7);
+  padding:22px;
+  border-radius:16px;
+  margin-bottom:18px;
+
+  backdrop-filter:blur(18px) saturate(180%);
+  box-shadow:
+     0 12px 26px rgba(0,0,0,0.15),
+     inset 0 0 18px rgba(255,255,255,0.45);
+}
+
+h2{
+  margin:0 0 10px;
+  background:linear-gradient(90deg,#00bcd4,#00e6a2);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+p{
+  color:var(--text-muted);
+  line-height:1.55;
+}
+
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+.table th,.table td{
+  padding:10px;
+  border-bottom:1px solid rgba(0,0,0,0.08);
+  color:#375969;
+}
+
+
+.small{
+  font-size:0.92rem;
+  color:var(--text-muted);
+}
+
+
+.controls{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-top:12px;
+}
+
+.btn{
+  background:linear-gradient(135deg,var(--aero-cyan),var(--aero-green));
+  color:#083e47;
+  padding:9px 14px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+
+  text-shadow:0 0 4px rgba(255,255,255,0.8);
+  box-shadow:0 5px 15px rgba(0,0,0,0.18);
+  transition:0.23s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 9px 22px rgba(0,0,0,0.22);
+}
+
+
+.input{
+  background:rgba(255,255,255,0.75);
+  border:1px solid rgba(0,0,0,0.1);
+  padding:8px 10px;
+  border-radius:10px;
+  color:#1e4a55;
+  backdrop-filter:blur(4px);
+}
+
+
+.canvas-sm{
+  width:100%;
+  height:160px;
+  background:linear-gradient(180deg,var(--bg-soft),var(--aero-blue));
+  border-radius:10px;
+  box-shadow:inset 0 0 20px rgba(255,255,255,0.4);
+}
+
+
+.footer{
+  margin-top:28px;
+  padding:22px;
+  text-align:center;
+  color:#3e5561;
+  border-top:1px solid rgba(255,255,255,0.6);
+}
+
+
+.modal{
+  position:fixed;
+  left:50%; top:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(255,255,255,0.75);
+  border:1px solid rgba(255,255,255,0.8);
+  padding:18px;
+  border-radius:14px;
+  max-width:90%;
+  max-height:80%;
+  overflow:auto;
+  display:none;
+  z-index:60;
+  backdrop-filter:blur(16px) saturate(160%);
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+}
+
+.modal.show{display:block;}
+
+.modal pre{
+  white-space:pre-wrap;
+  color:#204554;
+}
+
+
+@media (max-width:760px){
+  header{
+    flex-direction:column;
+    gap:12px;
+    text-align:center;
+  }
+  nav{margin-top:8px}
+}
+</style>
+
+</head>
+<body>
+<header>
+  <h1>Espacio Muestral & Eventos</h1>
+  <nav>
+    <a href="#definiciones">Definiciones</a>
+    <a href="#ejemplos">Ejemplos Logísticos</a>
+    <a href="#simulador">Simulador</a>
+    <a href="#recursos">Recursos</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section id="definiciones" class="card">
+    <h2>Definiciones clave</h2>
+    <p class="small">Basado en su documentación interna y fuentes especializadas, resumimos los conceptos esenciales para aplicaciones empresariales.</p>
+    <p><strong>Espacio muestral (Ω):</strong> conjunto de todos los resultados posibles de un experimento aleatorio (ej.: lanzar un dado Ω = {1,2,3,4,5,6}).</p>
+    <p><strong>Evento:</strong> subconjunto de Ω. Ej.: A = {4,5,6} es el evento "turno prioritario" si el dado sale 4–6.</p>
+    <p><strong>Probabilidad:</strong> medida entre 0 y 1 asignada a eventos; P(Ω)=1 y para A⊂Ω, P(Aᶜ)=1−P(A).</p>
+  </section>
+
+  <section id="definiciones" class="card">
+<h2>imagen representativa</h2>
+  <center><img src="imagens/espacio muestral.gif"></p>
+  </center>
+
+  <section id="ejemplos" class="card">
+    <h2>Ejemplos resueltos en logística (detallado)</h2>
+    <article>
+      <h3 class="small">1) Demanda diaria de gasolina</h3>
+      <p>Espacio muestral: <code>Ω = {0,1,2,…,1000}</code> galones diarios (discreto). Evento de interés: "demanda superior a 800 galones" A = {801,...,1000}.</p>
+      <p><strong>Si no tenemos otra información</strong> y asumimos distribución uniforme (hipótesis conservadora para estimaciones iniciales), la probabilidad teórica sería:</p>
+      <p class="small"><code>P(A) = |A| / |Ω| = 200 / 1001 ≈ 0.1998 (≈19.98%)</code></p>
+      <p><strong>Interpretación logística:</strong> Con P(A)≈20%, planificar reabastecimiento temprano en 1 de cada 5 días ayuda a mantener servicio; ajustar con datos históricos para obtener distribución real (no uniforme).</p>
+    </article>
+
+    <article style="margin-top:14px">
+      <h3 class="small">2) Inspección de lotes</h3>
+      <p>Se inspeccionan 5 lotes; cada lote puede ser {defectuoso, aceptable}. Espacio muestral: <code>|Ω| = 2^5 = 32</code> combinaciones posibles.</p>
+      <p>Evento: "al menos 2 defectuosos". Si p = probabilidad de defecto por lote (estimada con histórico), la probabilidad se calcula por distribución binomial:</p>
+      <p class="small"><code>P(X ≥ 2) = 1 − [P(0) + P(1)] = 1 − [ (1−p)^5 + 5·p·(1−p)^4 ]</code></p>
+      <p><strong>Ejemplo numérico:</strong> si p = 0.1 (10% defecto),</p>
+      <p class="small"><code>P(X ≥ 2) = 1 − [0.9^5 + 5·0.1·0.9^4] ≈ 0.08146 (≈8.15%)</code></p>
+      <p><strong>Aplicación:</strong> si P(X ≥ 2) supera un umbral aceptable (ej. 5%), activar contención y revisar proveedores.</p>
+    </article>
+
+    <article style="margin-top:14px">
+      <h3 class="small">3) Lanzamiento de dado para turnos</h3>
+      <p>Espacio muestral: <code>Ω = {1,2,3,4,5,6}</code>. Evento "turno prioritario": A = {4,5,6}. P(A) = 3/6 = 0.5.</p>
+      <p>Interpretación: si asignas prioridad con ese criterio, la mitad de los días habrá turno prioritario; útil para balancear carga operativa.</p>
+    </article>
+  </section>
+
+  <section id="simulador" class="card">
+    <h2>Simulador interactivo de logística</h2>
+    <p class="small">Tres simuladores: demanda de gasolina, inspección de lotes y lanzamiento de dados. Ejecuta experimentos aleatorios y obtén estimaciones empíricas.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px">
+      <div class="panel">
+        <h4 class="small">Demanda diaria (0–1000)</h4>
+        <div class="controls">
+          <label class="small">Simulaciones:</label>
+          <input id="trialsDemand" class="input" type="number" value="10000" min="100" max="200000">
+          <button class="btn" id="runDemand">Ejecutar</button>
+        </div>
+        <div style="margin-top:10px" class="small">Umbral (galones): <input id="threshold" class="input" type="number" value="800" min="0" max="1000" style="width:110px"></div>
+        <canvas id="chartDemand" class="canvas-sm"></canvas>
+        <p id="demandResult" class="small"></p>
+      </div>
+
+      <div>
+        <h4 class="small">Inspección de lotes (5)</h4>
+        <div class="controls">
+          <label class="small">Simulaciones:</label>
+          <input id="trialsInspect" class="input" type="number" value="20000" min="100" max="200000">
+          <button class="btn" id="runInspect">Ejecutar</button>
+        </div>
+        <div style="margin-top:10px" class="small">Prob. defecto por lote p: <input id="pDef" class="input" type="number" step="0.01" value="0.1" min="0" max="1" style="width:90px"></div>
+        <canvas id="chartInspect" class="canvas-sm"></canvas>
+        <p id="inspectResult" class="small"></p>
+      </div>
+    </div>
+
+    <div style="margin-top:14px">
+      <h4 class="small">Lanzamiento de dado</h4>
+      <div class="controls">
+        <label class="small">Simulaciones:</label>
+        <input id="trialsDie" class="input" type="number" value="10000" min="10" max="200000">
+        <button class="btn" id="runDie">Ejecutar</button>
+      </div>
+      <canvas id="chartDie" class="canvas-sm" style="margin-top:10px"></canvas>
+      <p id="dieResult" class="small"></p>
+    </div>
+
+  </section>
+
+  <section id="recursos" class="card">
+    <h2>Recursos y referencias</h2>
+    <p class="small">Documento base (PDF) y referencias especializadas usadas al construir este contenido.</p>
+    <ul class="small">
+      <li>Documento proporcionado por el usuario (PDF): análisis teórico del espacio muestral y eventos.</li>
+      <li>Materiales de estadística aplicada y logística para interpretación de ejemplos.</li>
+    </ul>
+  </section>
+
+  <section id="python" class="card">
+    <h2>Simulador avanzado (Python)</h2>
+    <p class="small">Puedes descargar el script Python que genera los gráficos y simulaciones. También puedes ver el código directamente en el modal.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn" id="downloadPy">Descargar script Python</button>
+      <button class="btn" id="viewPy">Ver código</button>
+    </div>
+  </section>
+
+ <div id="container" class="card">
+<h2>video explicatibo del canal autoestudio10</h2>
+<center><iframe 
+width="560"
+height="315" 
+src="https://rr1---sn-uvu5a2a5t-bqae7.googlevideo.com/videoplayback?expire=1765293178&ei=Gug3admXLazDkucP06umkAY&ip=82.26.212.194&id=o-ALsYZSpAMG8LqHAdvOoZe3jYC4h9haYeCNYm2noPxMnp&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&rms=au%2Cau&pcm2=yes&bui=AYUSA3DG1-2yEf6T9dUkvc9X176kSAOMDfQe4fJuiLu9smOtyh1UDJ1EXohcSZFFTTbLN6nyH6JEL3Bh&spc=wH4Qq1TvGswuJO2k81S_G8btprizTO1hqFRm72c_cml6SLIrcWsnf__N-LczWI4zrtA&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&cnr=14&ratebypass=yes&dur=210.442&lmt=1698031602875970&fexp=51552689,51565115,51565681,51580968&c=ANDROID&txp=6218224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cpcm2%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Ccnr%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRgIhAI0bHGsFaVBPO5Bsazlk3o54U78T2D4bXOo-LrjD_MjeAiEA15va1OLEpAltAJUqzsgsq9GCV6DiB7hBK44mDNzU-Bs%3D&redirect_counter=1&rm=sn-q4fezz7s&rrc=104&req_id=cc2452ff8cb9a3ee&cms_redirect=yes&cmsv=e&cps=0&ipbypass=yes&met=1765271720,&mh=NP&mip=2806:2f0:6241:e1e3:6125:404d:989a:29e&mm=31&mn=sn-uvu5a2a5t-bqae7&ms=au&mt=1765271403&mv=m&mvi=1&pl=52&lsparams=cps,ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=APaTxxMwRgIhANxfv8ezabq9bMExgy9Xj4gHG38il5XQPEcjIvBzrQtCAiEArZ7n4gpjG1gOYFR6g4Km09dVBhmh9j-YfeDRC4MQU3Q%3D" 
+title="espacio muestral y eventos" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe></center>
+</div>
+
+<footer class="footer">
+    <div class="credits">Créditos</div>
+    <div class="small"><li>3.1: Espacios de muestra, eventos y sus probabilidades. (2022, October 31). LibreTexts Español. https://espanol.libretexts.org/Bookshelves/Estadisticas/Estadisticas_Introductorias/Libro%3A_Estad%C3%ADsticas_Introductorias_(Shafer_y_Zhang)/03%3A_Conceptos_b%C3%A1sicos_de_probabilidad/3.01%3A_Espacios_de_muestra%2C_eventos_y_sus_probabilidades</li>
+<li>hg353732. (2025). Eventos y el espacio muestral. Scribd. https://es.scribd.com/document/871561512/Eventos-y-el-espacio-muestral</li>
+‌</div>
+  </footer>
+</main>
+
+<div class="modal" id="modalCode"><h3 style="margin-top:0;color:var(--gold)">simuladores_logistica.py</h3><pre id="modalPre"></pre><div style="text-align:right;margin-top:8px"><button class="btn" id="closeModal">Cerrar</button></div></div>
+
+<script>
+
+function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min }
+
+
+const runDemandBtn = document.getElementById('runDemand');
+const chartDemand = document.getElementById('chartDemand');
+const demandCtx = chartDemand.getContext('2d');
+function resizeCanvas(c){ c.width = c.clientWidth; c.height = c.clientHeight }
+[chartDemand, document.getElementById('chartInspect'), document.getElementById('chartDie')].forEach(resizeCanvas);
+
+runDemandBtn.addEventListener('click', ()=>{
+  const trials = Number(document.getElementById('trialsDemand').value) || 10000;
+  const threshold = Number(document.getElementById('threshold').value) || 800;
+  const counts = new Array(1001).fill(0);
+  let over=0;
+  for(let i=0;i<trials;i++){
+    const d = randInt(0,1000);
+    counts[d]++;
+    if(d>threshold) over++;
+  }
+
+  const ctx = demandCtx; ctx.clearRect(0,0,chartDemand.width,chartDemand.height);
+  const w = chartDemand.width; const h = chartDemand.height; const bw = w/50; // coarse bins
+  const bins = 50; const binCounts = new Array(bins).fill(0);
+  for(let i=0;i<=1000;i++){ const b = Math.floor(i/(1001/bins)); binCounts[b]+=counts[i] }
+  const maxc = Math.max(...binCounts);
+  for(let i=0;i<bins;i++){ const bh = (binCounts[i]/maxc)* (h-20); ctx.fillStyle = '#c9a23f'; ctx.fillRect(i*bw, h-bh, bw-2, bh) }
+  const prob = over/trials; document.getElementById('demandResult').textContent = `Estimación empírica P(demanda>${threshold}) = ${prob.toFixed(4)} (sobre ${trials} simulaciones)`;
+});
+
+
+const runInspectBtn = document.getElementById('runInspect');
+const inspectCtx = document.getElementById('chartInspect').getContext('2d');
+runInspectBtn.addEventListener('click', ()=>{
+  const trials = Number(document.getElementById('trialsInspect').value) || 10000;
+  const p = Number(document.getElementById('pDef').value) || 0.1;
+  const counts = new Array(6).fill(0); // 0..5 defects
+  for(let t=0;t<trials;t++){
+    let defects=0;
+    for(let i=0;i<5;i++){ if(Math.random()<p) defects++ }
+    counts[defects]++;
+  }
+ 
+  const c = inspectCtx; c.clearRect(0,0,chartInspect.width,chartInspect.height);
+  const w = chartInspect.width; const h = chartInspect.height; const bw = w/6;
+  const maxc = Math.max(...counts);
+  for(let i=0;i<=5;i++){ const bh = (counts[i]/maxc)*(h-20); c.fillStyle='#c9a23f'; c.fillRect(i*bw+8, h-bh, bw-12, bh); c.fillStyle='#ddd'; c.fillText(i, i*bw+bw/2, h-4) }
+  const probAtLeast2 = counts.slice(2).reduce((a,b)=>a+b,0)/trials; document.getElementById('inspectResult').textContent = `P(X ≥ 2) ≈ ${probAtLeast2.toFixed(4)} (p=${p})`;
+});
+
+
+const runDieBtn = document.getElementById('runDie');
+const dieCtx = document.getElementById('chartDie').getContext('2d');
+runDieBtn.addEventListener('click', ()=>{
+  const trials = Number(document.getElementById('trialsDie').value) || 10000;
+  const counts = [0,0,0,0,0,0];
+  for(let i=0;i<trials;i++){ counts[randInt(1,6)-1]++ }
+ 
+  const c = dieCtx; c.clearRect(0,0,chartDie.width,chartDie.height); const w=chartDie.width; const h=chartDie.height; const bw = w/6;
+  const maxc = Math.max(...counts);
+  for(let i=0;i<6;i++){ const bh = (counts[i]/maxc)*(h-20); c.fillStyle='#c9a23f'; c.fillRect(i*bw+6, h-bh, bw-12, bh); c.fillStyle='#ddd'; c.fillText(i+1, i*bw+bw/2, h-6) }
+  const probPriority = (counts[3]+counts[4]+counts[5])/trials; document.getElementById('dieResult').textContent = `P(turno prioritario) ≈ ${probPriority.toFixed(4)} (A={4,5,6})`;
+});
+
+
+const pyCode = `# simuladores_logistica.py
+# Requiere: numpy, matplotlib
+import numpy as np
+import matplotlib.pyplot as plt
+
+def simulate_demand(trials=100000, max_gal=1000, threshold=800, seed=0):
+    rng = np.random.default_rng(seed)
+    samples = rng.integers(0, max_gal+1, size=trials)
+    prob = np.mean(samples > threshold)
+    plt.figure(figsize=(8,3))
+    plt.hist(samples, bins=50, color='#c9a23f', edgecolor='black')
+    plt.title('Demanda diaria')
+    plt.tight_layout()
+    plt.savefig('demand_hist.png', dpi=150)
+    plt.close()
+    return prob
+
+
+def simulate_inspection(trials=200000, p_def=0.1, lots=5, seed=1):
+    rng = np.random.default_rng(seed)
+    samples = rng.binomial(lots, p_def, size=trials)
+    prob_at_least_2 = np.mean(samples >= 2)
+    counts = np.bincount(samples, minlength=lots+1)
+    plt.figure(figsize=(6,3))
+    xs = np.arange(0, lots+1)
+    plt.bar(xs, counts/np.sum(counts), color='#c9a23f', edgecolor='black')
+    plt.xticks(xs)
+    plt.title('Inspección de lotes')
+    plt.tight_layout()
+    plt.savefig('inspection_dist.png', dpi=150)
+    plt.close()
+    return prob_at_least_2
+
+
+def simulate_die(trials=50000, seed=2):
+    rng = np.random.default_rng(seed)
+    samples = rng.integers(1,7, size=trials)
+    prob_priority = np.mean(np.isin(samples, [4,5,6]))
+    counts = np.bincount(samples)[1:7]
+    plt.figure(figsize=(6,3))
+    xs = np.arange(1,7)
+    plt.bar(xs, counts/np.sum(counts), color='#c9a23f', edgecolor='black')
+    plt.title('Lanzamiento de dado')
+    plt.tight_layout()
+    plt.savefig('die_dist.png', dpi=150)
+    plt.close()
+    return prob_priority
+
+if __name__ == '__main__':
+    print('Ejecutando simuladores...')
+    p_demand = simulate_demand(trials=100000, threshold=800)
+    print(f'P(demanda > 800) ≈ {p_demand:.5f}')
+    p_inspect = simulate_inspection(trials=200000, p_def=0.1)
+    print(f'P(al menos 2 defectuosos) ≈ {p_inspect:.5f}')
+    p_die = simulate_die(trials=50000)
+    print(f'P(turno prioritario) ≈ {p_die:.5f}')
+`;
+
+const downloadBtn = document.getElementById('downloadPy');
+const viewBtn = document.getElementById('viewPy');
+const modal = document.getElementById('modalCode');
+const modalPre = document.getElementById('modalPre');
+const closeModal = document.getElementById('closeModal');
+
+downloadBtn.addEventListener('click', ()=>{
+  const blob = new Blob([pyCode], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'simuladores_logistica.py'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+});
+viewBtn.addEventListener('click', ()=>{ modalPre.textContent = pyCode; modal.classList.add('show'); });
+closeModal.addEventListener('click', ()=>{ modal.classList.remove('show'); });
+
+window.addEventListener('resize', ()=>{ [document.getElementById('chartDemand'), document.getElementById('chartInspect'), document.getElementById('chartDie')].forEach(c=>{ c.width = c.clientWidth; c.height = c.clientHeight }) });
+</script>
+</body>
+</html>
